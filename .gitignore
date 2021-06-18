@@ -1,6 +1,9 @@
 # Ignore build output directory
 build/
 
+# package-lock (not a node project)
+package.lock.json
+
 # Dependency directories
 node_modules/
 

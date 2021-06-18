@@ -4,20 +4,16 @@
     "parserOptions": {
         "project": "./tsconfig.json"
     },
-    "env": {
-        "browser": true
-    },
     "plugins": [
-      "@typescript-eslint"
+        "@typescript-eslint"
     ],
     "extends": [
         "eslint:recommended",
         "plugin:@typescript-eslint/eslint-recommended",
-        "plugin:@typescript-eslint/recommended",
-        "plugin:@typescript-eslint/recommended-requiring-type-checking"
+        "plugin:@typescript-eslint/recommended"
     ],
-    "scripts": {
-        "lint": "eslint . --ext .js --ext .ts"
+    "env": {
+        "browser": true
     },
     "rules": {
         "arrow-spacing": "error",

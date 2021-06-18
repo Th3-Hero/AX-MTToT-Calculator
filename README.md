@@ -10,3 +10,7 @@ This calculator is designed to find the minimal theoretical time on target for y
 [~~GitHub Pages Link~~]() \
 **OR** \
 ~~Run the `index.html`~~
+
+### Credits:
+[Programing: The Hero](https://bit.ly/3wzBDgD) \
+Initial math and spreadsheet: CMDR Mechan
