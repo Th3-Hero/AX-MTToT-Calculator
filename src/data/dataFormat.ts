@@ -33,3 +33,12 @@ interface goidData {
     regenPerSecond: number;
     exertHP: number;
 }
+
+interface distributorEngineeringData {
+    effectName: string;
+    weaponRechargePercent: number;
+    experimentalEffect1: string;
+    experimentalEffectRechargePercent1: number;
+    experimentalEffect2: string;
+    experimentalEffectRechargePercent2: number;
+}

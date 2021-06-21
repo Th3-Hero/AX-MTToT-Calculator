@@ -48,3 +48,57 @@ const distributorRechargeData: string = {
     "8D": "5.4",
     "8E": "4.8"
 };
+
+const distroCE: distributorEngineeringData = {
+    effectName: "Charge Enhanced",
+    weaponRechargePercent: 0.45,
+    experimentalEffect1: "Cluster Capacitors",
+    experimentalEffectRechargePercent1: 0.421,
+    experimentalEffect2: "Super Conduits",
+    experimentalEffectRechargePercent2: 0.508
+};
+
+const distroEF: distributorEngineeringData = {
+    effectName: "Engine Focused",
+    weaponRechargePercent: -0.05,
+    experimentalEffect1: "Cluster Capacitors",
+    experimentalEffectRechargePercent1: -0.069,
+    experimentalEffect2: "Super Conduits",
+    experimentalEffectRechargePercent2: -0.012
+};
+
+const distroHCC: distributorEngineeringData = {
+    effectName: "High Charge Capacity",
+    weaponRechargePercent: -0.18,
+    experimentalEffect1: "Cluster Capacitors",
+    experimentalEffectRechargePercent1: -0.196,
+    experimentalEffect2: "Super Conduits",
+    experimentalEffectRechargePercent2: -0.147
+};
+
+const distroSF: distributorEngineeringData = {
+    effectName: "System Focused",
+    weaponRechargePercent: -0.15,
+    experimentalEffect1: "Cluster Capacitors",
+    experimentalEffectRechargePercent1: -0.167,
+    experimentalEffect2: "Super Conduits",
+    experimentalEffectRechargePercent2: -0.116
+};
+
+const distroSH: distributorEngineeringData = {
+    effectName: "Shielded",
+    weaponRechargePercent: 0,
+    experimentalEffect1: "Cluster Capacitors",
+    experimentalEffectRechargePercent1: -0.02,
+    experimentalEffect2: "Super Conduits",
+    experimentalEffectRechargePercent2: 0.04
+};
+
+const distroWF: distributorEngineeringData = {
+    effectName: "Weapon Focused",
+    weaponRechargePercent: 0.44,
+    experimentalEffect1: "Cluster Capacitors",
+    experimentalEffectRechargePercent1: 0.411,
+    experimentalEffect2: "Super Conduits",
+    experimentalEffectRechargePercent2: 0.498
+};
