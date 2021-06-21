@@ -4,14 +4,286 @@
     <head>
         <meta charset="UTF-8">
         <title>AX MTToT Calculator</title>
-        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="UI/css/main.css">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     </head>
 
     <body>
-        <button onclick="test()">Some random button</button>
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur vitae vel maxime.</p>
-        <script src="build/test.js"></script>
+        <grid id="grid-container">
+
+
+
+            <weapon-inputs class="weapon-inputs-container">
+                <div class="title-wrap">
+                    Settings:
+                </div>
+
+
+                <div>
+                    <div class="custom-label">
+                        Weapon Selection
+                    </div>
+
+                    <div>
+                        <select id="weapon-dropdown1" class="dropdown-select">
+                            <option value="none">None</option>
+                            <option value="gauss">Guardian Gauss Cannon</option>
+                            <option value="shard">Guardian Shard Cannon</option>
+                            <option value="plasma">Guardian Plasma Charger</option>
+                            <option value="axmc">Anti-Xeno Multi Cannon</option>
+                            <option value="axmct">Anti-Xeno Multi Cannon Turreted</option>
+                            <option value="axmr">Anti-Xeno Missile Rack</option>
+                        </select>
+                        <select id="size-dropdown1" class="dropdown-select">
+                            <option value="1">C1</option>
+                            <option value="2">C2</option>
+                            <option value="3">C3</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <select id="weapon-dropdown2" class="dropdown-select">
+                            <option value="none">None</option>
+                            <option value="gauss">Guardian Gauss Cannon</option>
+                            <option value="shard">Guardian Shard Cannon</option>
+                            <option value="plasma">Guardian Plasma Charger</option>
+                            <option value="axmc">Anti-Xeno Multi Cannon</option>
+                            <option value="axmct">Anti-Xeno Multi Cannon Turreted</option>
+                            <option value="axmr">Anti-Xeno Missile Rack</option>
+                        </select>
+                        <select id="size-dropdown2" class="dropdown-select">
+                            <option value="1">C1</option>
+                            <option value="2">C2</option>
+                            <option value="3">C3</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <select id="weapon-dropdown3" class="dropdown-select">
+                            <option value="none">None</option>
+                            <option value="gauss">Guardian Gauss Cannon</option>
+                            <option value="shard">Guardian Shard Cannon</option>
+                            <option value="plasma">Guardian Plasma Charger</option>
+                            <option value="axmc">Anti-Xeno Multi Cannon</option>
+                            <option value="axmct">Anti-Xeno Multi Cannon Turreted</option>
+                            <option value="axmr">Anti-Xeno Missile Rack</option>
+                        </select>
+                        <select id="size-dropdown3" class="dropdown-select">
+                            <option value="1">C1</option>
+                            <option value="2">C2</option>
+                            <option value="3">C3</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <select id="weapon-dropdown4" class="dropdown-select">
+                            <option value="none">None</option>
+                            <option value="gauss">Guardian Gauss Cannon</option>
+                            <option value="shard">Guardian Shard Cannon</option>
+                            <option value="plasma">Guardian Plasma Charger</option>
+                            <option value="axmc">Anti-Xeno Multi Cannon</option>
+                            <option value="axmct">Anti-Xeno Multi Cannon Turreted</option>
+                            <option value="axmr">Anti-Xeno Missile Rack</option>
+                        </select>
+                        <select id="size-dropdown4" class="dropdown-select">
+                            <option value="1">C1</option>
+                            <option value="2">C2</option>
+                            <option value="3">C3</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="custom-label">
+                        Distributor Selection
+                    </div>
+
+                    <div>
+                        <select id="distro-size-dropdown" class="dropdown-select">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                        </select>
+                        <select id="distro-class-dropdown" class="dropdown-select">
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                            <option value="E">E</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <div>
+                            <select id="distro-engineering-dropdown" class="dropdown-select">
+                                <option value="none">None</option>
+                                <option value="CE">Charge Enhanced</option>
+                                <option value="EF">Engine Focused</option>
+                                <option value="HCC">High Charge Capacity</option>
+                                <option value="S">Shielded</option>
+                                <option value="SF">System Focused</option>
+                                <option value="WF">Weapon Focused</option>
+                            </select>
+                        </div>
+                        <div>
+                            <select id="distro-engineering-experimental-dropdown" class="dropdown-select">
+                                <option value="none">None</option>
+                                <option value="CC">Cluster Capacitors</option>
+                                <option value="SC">Super Conduits</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="custom-label">
+                        Target Selection
+                    </div>
+                    
+                    <div>
+                        <select id="target-selection-dropdown" class="dropdown-select">
+                            <option value="Cyclops">Cyclops</option>
+                            <option value="Basilisk">Basilisk</option>
+                            <option value="Medusa">Medusa</option>
+                            <option value="Hydra">Hydra</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="custom-label">
+                        Target Range
+                    </div>
+
+                    <input type="text" id="range" class="text-input small-text-input" placeholder="0">
+                </div>
+
+                <div>
+                    <div class="custom-label">
+                        Heatsinks Selection
+                    </div>
+
+                    <input type="text" id="sinks" class="text-input small-text-input" placeholder="0">
+                </div>
+            </weapon-inputs>
+
+
+
+            <display class="display-container">
+                <div class="main-title-wrap">
+                    Minimum Theoretical <br>
+                    Time on Target <br>
+                    Calculator
+                </div>
+
+                <div>
+                    <table class="data-table">
+                        <tr class="table-row">
+                            <th class="table-header-top table-header-end">Ammo</th>
+                            <th class="table-header-top">Basic</th>
+                            <th class="table-header-top">Standard</th>
+                            <th class="table-header-top">Premium</th>
+                        </tr>
+                        <tr class="table-row">
+                            <th class="table-header-side">100% Accuracy</th>
+                            <td class="table-info" id="100Basic">N/A</td>
+                            <td class="table-info" id="100Std">N/A</td>
+                            <td class="table-info" id="100Prem">N/A</td>
+                        </tr>
+                        <tr class="table-row">
+                            <th class="table-header-side">75% Accuracy</th>
+                            <td class="table-info" id="75Basic">N/A</td>
+                            <td class="table-info" id="75Std">N/A</td>
+                            <td class="table-info" id="75Prem">N/A</td>
+                        </tr>
+                        <tr class="table-row">
+                            <th class="table-header-side table-header-end">50% Accuracy</th>
+                            <td class="table-info" id="50Basic">N/A</td>
+                            <td class="table-info" id="50Std">N/A</td>
+                            <td class="table-info" id="50Prem">N/A</td>
+                        </tr>
+                    </table>
+                </div>
+            </display>
+
+
+
+            <chart-display class="chart-display-container">
+                <div class="title-wrap">
+                    Create a chart:
+                </div>
+
+                <div class="custom-label">
+                    Ammo Selection
+                </div>
+                <select id="ammo-selection-dropdown" class="dropdown-select">
+                    <option value="Basic">Basic</option>
+                    <option value="Std">Standard</option>
+                    <option value="Prem">Premium</option>
+                </select>
+
+                <div>
+                    <div class="custom-label">
+                        Accuracy
+                    </div>
+
+                    <select id="custom-accuracy" class="dropdown-select">
+                        <option value="100">100%</option>
+                        <option value="75">75%</option>
+                        <option value="50">50%</option>
+                    </select>
+                </div>
+
+                <div>
+                    <div class="custom-label">
+                        Ship Name
+                    </div>
+
+                    <input type="text" id="ship-name" class="text-input large-text-input" placeholder="Ship Name Here">
+                </div>
+
+                <div id="create-a-chart-container">
+                    <div id="chart-content">
+                        <div class="create-a-chart">Ship Name</div>
+                        <div class="create-a-chart">Distro</div>
+                        <div class="create-a-chart">Accuracy</div>
+                        <div class="create-a-chart">0ms SDPS cycle</div>
+                        <div class="chart-wrap">
+                            <table class="chart-table">
+                                <tr>
+                                    <div class="chart-section">
+                                        <img class="outline-image" src="UI/images/Clops_Outline.png">
+                                        <div class="chart-text">0</div>
+                                    </div>
+                                    <div class="chart-section">
+                                        <img class="outline-image" src="UI/images/Basi_Outline.png">
+                                        <div class="chart-text">0</div>
+                                    </div>
+                                </tr> <br>
+                                <tr>
+                                    <div class="chart-section">
+                                        <img class="outline-image" src="UI/images/Dusa_Outline.png">
+                                        <div class="chart-text">0</div>
+                                    </div>
+                                    <div class="chart-section">
+                                        <img class="outline-image" src="UI/images/Hydra_Outline.png">
+                                        <div class="chart-text">0</div>
+                                    </div>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </chart-display>
+
+        </grid>
+
+        <!-- <script src="build/file.js"></script> -->
     </body>
 
 </html>

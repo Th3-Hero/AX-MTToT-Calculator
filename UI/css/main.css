@@ -1,0 +1,196 @@
+/*
+Font: #fff
+Inputs: #333333
+Lighter Background: #292929
+Background: #212121
+Darker: #171717
+Orange: #ff7100
+*/
+
+body {
+    font-family: sans-serif;
+    color: white;
+    background: #212121;
+}
+
+/* ------------------------------- */
+/* MULTI USE PARAMETERS START      */
+/* ------------------------------- */
+.title-wrap {
+    margin-top: 10px;
+    margin-left: 15px;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.custom-label {
+    margin-top: 10px;
+    margin-left: 15px;
+    font-size: 24px; /*try 20,22,24*/
+}
+
+.outline-image {
+    height: 140px;
+    width: 140px;
+}
+
+.dropdown-select {
+    margin-top: 5px;
+    margin-left: 15px;
+    height: 25px;
+    color: white;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    background: #333333;
+}
+
+.dropdown-select:hover {
+    cursor: pointer;
+}
+
+.text-input {
+    outline: none;
+    margin-top: 5px;
+    margin-left: 15px;
+    height: 20px;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background: #333333;
+}
+
+.text-input:focus {
+    border: 2px solid #ff7100;
+}
+
+.small-text-input {
+    width: 50px;
+    padding: 3px 0px;
+    text-align: center;
+}
+
+.large-text-input {
+    width: 200px;
+    padding: 3px 0px;
+    text-align: center;
+}
+
+.chart-section {
+    position: relative;
+    float: left;
+    text-align: center;
+    color: white;
+}
+
+.chart-text {
+    position: absolute;
+    top: 48%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* ------------------------------- */
+/* MULTI USE PARAMETERS END        */
+/* ------------------------------- */
+.main-title-wrap {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.data-table {
+    /* margin-top: 20px; */
+    width: 450px;
+    border-collapse: collapse;
+    border-spacing: 0px;
+}
+
+.table-header-side {
+    width: 110px;
+}
+
+.table-header-end {
+    border-bottom: 3px solid #ff7100;
+}
+
+.table-header-top {
+    padding: 5px 0px;
+    border-top: 3px solid #ff7100;
+}
+
+.table-info {
+    height: 20px;
+    width: 80px;
+    padding: 4px 0px;
+    text-align: center;
+    border-top: 3px solid #ff7100;
+    border-bottom: 3px solid #ff7100;
+    border-left: 3px solid #ff7100;
+    border-right: 3px solid #ff7100;
+}
+
+.chart-table {
+    width: 300px;
+    border-collapse: collapse;
+    border-spacing: 0px;
+}
+
+.create-a-chart {
+    margin-top: 3px;
+    font-size: 20px;
+}
+
+.chart-wrap {
+    margin-top: 10px;
+    margin-left: 5px;
+}
+
+#create-a-chart-container {
+    border-top: 3px solid #ff7100;
+    margin-top: 27px;
+}
+
+#chart-content {
+    margin-top: 10px;
+    margin-left: 15px;
+}
+
+/* grid display */
+#grid-container {
+    display: grid;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background: #212121; /* Final Background: #212121 Testing BG:#3498db */
+    grid-template-columns: 325px 451px 325px;
+    grid-template-rows: 700px;
+    gap: 0px;
+    grid-template-areas: 
+        "weapon-inputs display chart-display";
+}
+
+#grid > weapon-inputs {
+    grid-area: weapon-inputs;
+}
+
+#grid > display {
+    grid-area: display;
+}
+
+#grid > chart-display {
+    grid-area: chart-display;
+}
+
+.weapon-inputs-container, .display-container, .chart-display-container {
+    border: 3px solid #ff7100;
+}
+
+.weapon-inputs-container, .display-container {
+    border-right: none;
+}

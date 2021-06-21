@@ -26,3 +26,10 @@ interface weaponData {
     weaponSize: number;
     weaponInformation: weaponInformationData;
 }
+
+interface goidData {
+    name: string;
+    armourRating: number;
+    regenPerSecond: number;
+    exertHP: number;
+}
