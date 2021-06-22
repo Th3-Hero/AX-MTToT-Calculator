@@ -2,7 +2,7 @@
 import { userInputs, userSelections } from "./runtime";
 import { gaussC2Fixed } from "./data/weaponData";
 
-function calculateMain() {
+export function calculateMain() {
     // collectUserInputs();
     // console.log(collectUserInputs);
     const testVar = gaussC2Fixed.weaponName;
