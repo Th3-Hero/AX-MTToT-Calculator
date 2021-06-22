@@ -6,6 +6,7 @@
 	import InfoTable from './components/InfoTable.svelte'
 	import CreateChartSlector from './components/CreateChartSelection.svelte'
 	import CreateChart from './components/CreateChart.svelte'
+	function testButton() {console.log("Click!")}
 </script>
 
 <main>
@@ -61,9 +62,9 @@
 				<input type="text" id="range" class="text-input small-text-input" placeholder="0">
 			</div>
 
-			<!-- <div>
-				<button on:click={calculateMain()}>Calculate</button>
-			</div> -->
+			<div>
+				<button class="custom-button" on:click={testButton}>Calculate</button>
+			</div>
 
 		</weapon-inputs>
 
@@ -89,7 +90,6 @@
 
 			<CreateChart/>
 
-			
 		</chart-display>
 
 	</grid>
@@ -99,10 +99,27 @@
 	
 	.main-title-wrap {
 		margin-top: 15px;
-		margin-bottom: 15px;
+		margin-bottom: 53px;
 		text-align: center;
 		font-size: 36px;
 		font-weight: bold;
+	}
+
+	.custom-button {
+		left: 162px;
+		bottom: 20px;
+		width: 125px;
+		padding: 5px 5px;
+		position: absolute;
+		transform: translate(-50%, 0%);
+		background: none;
+		color: white;
+		border: 3px solid #ff7100;
+		border-radius: 10px;
+		text-align: center;
+		font-size: 16px;
+		font-weight: bold;
+		cursor: pointer;
 	}
 
 </style>
