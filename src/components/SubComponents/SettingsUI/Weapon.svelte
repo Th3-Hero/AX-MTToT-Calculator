@@ -1,3 +1,7 @@
+<script>
+
+</script>
+
 <div class="custom-label">
     Weapon Selection
 </div>

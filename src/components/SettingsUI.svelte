@@ -54,7 +54,14 @@
 		text-align: center;
 		font-size: 16px;
 		font-weight: bold;
-		cursor: pointer;
+		background-image: linear-gradient(90deg, #ff7100 50%, transparent 0%);
+		background-position: 100%;
+		background-size: 400%;
+        transition: background 500ms ease-in-out;
 	}
+
+    .custom-button:hover {
+        background-position: 0;
+    }
 
 </style>

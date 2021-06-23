@@ -1,5 +1,4 @@
 <script>
-    import CreateChartSlector from './SubComponents/CreateChart/CreateChartSelection.svelte'
 	import CreateChart from './SubComponents/CreateChart/CreateChart.svelte'
 </script>
 
