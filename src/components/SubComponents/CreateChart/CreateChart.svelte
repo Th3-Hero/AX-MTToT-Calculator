@@ -1,6 +1,40 @@
+<script>
+    let shipName = '';
+</script>
+
+<div class="custom-label">
+    Ammo Selection
+</div>
+<select id="ammoSelectionDropdown" class="dropdown-select">
+    <option value="Basic">Basic</option>
+    <option value="Std">Standard</option>
+    <option value="Prem">Premium</option>
+</select>
+
+<div>
+    <div class="custom-label">
+        Accuracy
+    </div>
+
+    <select id="customAccuracy" class="dropdown-select">
+        <option value="100">100%</option>
+        <option value="75">75%</option>
+        <option value="50">50%</option>
+    </select>
+</div>
+
+<div>
+    <div class="custom-label">
+        Name your ship!
+    </div>
+
+    <input type="text" bind:value={shipName} class="text-input large-text-input" placeholder="Ship Name Here">
+
+</div>
+
 <div id="create-a-chart-container">
     <div id="chart-content">
-        <div class="create-a-chart">Ship Name</div>
+        <div class="create-a-chart">{shipName || "Ship Name"}</div>
         <div class="create-a-chart">Distro</div>
         <div class="create-a-chart">Accuracy</div>
         <div class="create-a-chart">0ms SDPS cycle</div>

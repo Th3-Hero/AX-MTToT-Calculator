@@ -116,7 +116,6 @@
 
 <style>
     .data-table {
-		/* margin-top: 20px; */
         margin-top: -2px;
 		width: 450px;
 		border-collapse: collapse;

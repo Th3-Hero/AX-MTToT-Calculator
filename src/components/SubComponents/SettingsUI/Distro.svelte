@@ -1,3 +1,7 @@
+<div class="custom-label">
+    Distributor Selection
+</div>
+
 <div>
     <select id="distroSizeDropdown" class="dropdown-select">
         <option value="1">1</option>

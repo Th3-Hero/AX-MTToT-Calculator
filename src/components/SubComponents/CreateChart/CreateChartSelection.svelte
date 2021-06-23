@@ -1,3 +1,7 @@
+<script>
+    let shipName = '';
+</script>
+
 <div class="custom-label">
     Ammo Selection
 </div>
@@ -21,11 +25,14 @@
 
 <div>
     <div class="custom-label">
-        Ship Name
+        {shipName} 
     </div>
 
-    <input type="text" id="shipName" class="text-input large-text-input" placeholder="Ship Name Here">
+
+    <input type="text" bind:value={shipName} class="text-input large-text-input" placeholder="Ship Name Here">
+
 </div>
+
 
 <style>
     
