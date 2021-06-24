@@ -1,72 +1,5 @@
-/*html, body {*/
-/*	position: relative;*/
-/*	width: 100%;*/
-/*	height: 100%;*/
-/*}*/
-
-/*body {*/
-/*	color: #333;*/
-/*	margin: 0;*/
-/*	padding: 8px;*/
-/*	box-sizing: border-box;*/
-/*	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;*/
-/*}*/
-
-/*a {*/
-/*	color: rgb(0,100,200);*/
-/*	text-decoration: none;*/
-/*}*/
-
-/*a:hover {*/
-/*	text-decoration: underline;*/
-/*}*/
-
-/*a:visited {*/
-/*	color: rgb(0,80,160);*/
-/*}*/
-
-/*label {*/
-/*	display: block;*/
-/*}*/
-
-/*input, button, select, textarea {*/
-/*	font-family: inherit;*/
-/*	font-size: inherit;*/
-/*	-webkit-padding: 0.4em 0;*/
-/*	padding: 0.4em;*/
-/*	margin: 0 0 0.5em 0;*/
-/*	box-sizing: border-box;*/
-/*	border: 1px solid #ccc;*/
-/*	border-radius: 2px;*/
-/*}*/
-
-/*input:disabled {*/
-/*	color: #ccc;*/
-/*}*/
-
-/*button {*/
-/*	color: #333;*/
-/*	background-color: #f4f4f4;*/
-/*	outline: none;*/
-/*}*/
-
-/*button:disabled {*/
-/*	color: #999;*/
-/*}*/
-
-/*button:not(:disabled):active {*/
-/*	background-color: #ddd;*/
-/*}*/
-
-/*button:focus {*/
-/*	border-color: #666;*/
-/*}*/
-
-
-
-
 /*
-Font: #fff
+Font: #ffffff
 Inputs: #333333
 Lighter Background: #292929
 Background: #212121
@@ -76,62 +9,12 @@ Orange: #ff7100
 
 body {
     font-family: sans-serif;
-    color: white;
+    color: #ffffff;
     background: #212121;
-}
-
-/* grid display */
-#grid-container {
-    display: grid;
-    justify-content: center;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    background: #212121; /* Final Background: #212121 Testing BG:#3498db */
-    grid-template-columns: 325px 451px 325px;
-    grid-template-rows: 700px;
-    gap: 0px;
-    grid-template-areas:
-    "weapon-inputs display chart-display";
-}
-
-#grid > weapon-inputs {
-    grid-area: weapon-inputs;
-}
-
-#grid > display {
-    grid-area: display;
-}
-
-#grid > chart-display {
-    grid-area: chart-display;
-}
-
-.weapon-inputs-container, .display-container, .chart-display-container {
-    border: 3px solid #ff7100;
-}
-
-.weapon-inputs-container, .display-container {
-    border-right: none;
-}
-
-.title-wrap {
-    margin-top: 10px;
-    margin-left: 15px;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.custom-label {
-    margin-top: 10px;
-    margin-left: 15px;
-    font-size: 24px; /*try 20,22,24*/
 }
 
 .dropdown-select {
     margin-top: 5px;
-    margin-left: 15px;
     height: 25px;
     color: white;
     font-size: 14px;
@@ -147,11 +30,10 @@ body {
 .text-input {
     outline: none;
     margin-top: 5px;
-    margin-left: 15px;
     height: 20px;
     color: white;
     font-size: 16px;
-    border: none;
+    border: 2px solid #333333;
     border-radius: 5px;
     background: #333333;
 }
@@ -160,14 +42,6 @@ body {
     border: 2px solid #ff7100;
 }
 
-.small-text-input {
-    width: 50px;
-    padding: 3px 0px;
-    text-align: center;
-}
-
-.large-text-input {
-    width: 200px;
-    padding: 3px 0px;
-    text-align: center;
+.content-shift {
+    margin-left: 15px;
 }

@@ -1,29 +1,43 @@
 <script lang="ts">
-	export let name: string;
-	import SettingUI from './components/SettingsUI.svelte'
-	import DataDisplay from './components/MainDataDisplay.svelte'
-	import CreateAChart from './components/CreateAChart.svelte'
-	
+	import SettingUi from './components/settings/SettingsUi.svelte'
+	import DataDisplay from './components/data-display/MainDataDisplay.svelte'
+	import TimeOnTargetChart from './components/time-on-target-chart/TimeOnTargetChart.svelte'
 </script>
 
 <main>
-	<grid id="grid-container">
+	<div class="grid-container">
+		<div class="component-container">
+			<SettingUi/>
+		</div>
 
-		<weapon-inputs class="weapon-inputs-container">
-			<SettingUI/>
-		</weapon-inputs>
+		<div class="component-container inner-container">
+			<DataDisplay/>
+		</div>
 
-		<display class="display-container">
-			<DataDisplay/>			
-		</display>
-
-		<chart-display class="chart-display-container">
-			<CreateAChart/>
-		</chart-display>
-
-	</grid>
+		<div class="component-container">
+			<TimeOnTargetChart/>
+		</div>
+	</div>
 </main>
 
-<style>
+<style lang="scss">
+	.grid-container {
+		display: grid;
+		justify-content: center;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%,-50%);
+		grid-template-columns: 325px 451px 325px;
+		grid-template-rows: 700px;
+	}
 
+	.component-container {
+		border: 3px solid #ff7100;
+	}
+
+	.inner-container {
+		border-right: none;
+		border-left: none;
+	}
 </style>

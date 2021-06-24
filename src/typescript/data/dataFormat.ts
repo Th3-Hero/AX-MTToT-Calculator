@@ -42,3 +42,8 @@ export interface DistributorEngineeringData {
     experimentalEffect2: string;
     experimentalEffectRechargePercent2: number;
 }
+
+export interface SelectedWeapon {
+    name: string;
+    class: string;
+}

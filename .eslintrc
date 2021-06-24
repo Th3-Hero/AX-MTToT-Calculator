@@ -31,6 +31,7 @@
         "no-unused-vars": "error",
         "no-var": "error",
         "object-curly-spacing": ["error", "always"],
+        "prefer-arrow-callback": "error",
         "semi": ["error", "always"],
         "sort-imports": "error",
         "space-before-function-paren": [2, {
