@@ -1,7 +1,7 @@
 /*
 Font: #ffffff
 Inputs: #333333
-Lighter Background: #292929
+Lighter Background: #323232
 Background: #212121
 Darker: #171717
 Orange: #ff7100
@@ -14,9 +14,8 @@ body {
 }
 
 .dropdown-select {
-    margin-top: 5px;
     height: 25px;
-    color: white;
+    color: #ffffff;
     font-size: 14px;
     border: none;
     border-radius: 5px;
@@ -40,8 +39,4 @@ body {
 
 .text-input:focus {
     border: 2px solid #ff7100;
-}
-
-.content-shift {
-    margin-left: 15px;
 }

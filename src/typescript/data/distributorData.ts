@@ -1,4 +1,4 @@
-import { DistributorEngineeringData } from "./dataFormat";
+import { Distributor, DistributorModifier } from "./dataFormat";
 
 const distributorRechargeData: { [name: string]: number } = {
     "1A": 1.8,
@@ -51,56 +51,32 @@ const distributorRechargeData: { [name: string]: number } = {
     "8E": 4.8
 };
 
-const distroCE: DistributorEngineeringData = {
-    effectName: "Charge Enhanced",
-    weaponRechargePercent: 0.45,
-    experimentalEffect1: "Cluster Capacitors",
-    experimentalEffectRechargePercent1: 0.421,
-    experimentalEffect2: "Super Conduits",
-    experimentalEffectRechargePercent2: 0.508
-};
+// TODO
+export const distributors: Distributor[] = [
+]
 
-const distroEF: DistributorEngineeringData = {
-    effectName: "Engine Focused",
-    weaponRechargePercent: -0.05,
-    experimentalEffect1: "Cluster Capacitors",
-    experimentalEffectRechargePercent1: -0.069,
-    experimentalEffect2: "Super Conduits",
-    experimentalEffectRechargePercent2: -0.012
-};
+export const distributorBlueprints: DistributorModifier[] = [
+    { name: 'Charge Enhanced', shortName: 'ce', weaponRechargeModifier: .45 },
+    { name: 'Engine Focused', shortName: 'ef', weaponRechargeModifier: -0.05 },
+    { name: 'High Charge Capacity', shortName: 'hc', weaponRechargeModifier: -0.18 },
+    { name: 'Shielded', shortName: 'sh', weaponRechargeModifier: 0 },
+    { name: 'System Focused', shortName: 'sf', weaponRechargeModifier: -0.15 },
+    { name: 'Weapon Focused', shortName: 'wf', weaponRechargeModifier: 0.44 }
+];
 
-const distroHCC: DistributorEngineeringData = {
-    effectName: "High Charge Capacity",
-    weaponRechargePercent: -0.18,
-    experimentalEffect1: "Cluster Capacitors",
-    experimentalEffectRechargePercent1: -0.196,
-    experimentalEffect2: "Super Conduits",
-    experimentalEffectRechargePercent2: -0.147
-};
+export const distributorExperimentEffects: DistributorModifier[] = [
+    { name: 'Cluster Capacitors', shortName: 'cc', weaponRechargeModifier: -0.02 },
+    { name: 'Double Braced', shortName: 'db', weaponRechargeModifier: 0 },
+    { name: 'Flow Control', shortName: 'fc', weaponRechargeModifier: 0 },
+    { name: 'Stripped Down', shortName: 'sd', weaponRechargeModifier: 0 },
+    { name: 'Super Conduits', shortName: 'sc', weaponRechargeModifier: 0.04 }
+];
 
-const distroSF: DistributorEngineeringData = {
-    effectName: "System Focused",
-    weaponRechargePercent: -0.15,
-    experimentalEffect1: "Cluster Capacitors",
-    experimentalEffectRechargePercent1: -0.167,
-    experimentalEffect2: "Super Conduits",
-    experimentalEffectRechargePercent2: -0.116
-};
+export const distributorSizes: number[] = [
+    1, 2, 3, 4, 5, 6, 7, 8
+];
 
-const distroSH: DistributorEngineeringData = {
-    effectName: "Shielded",
-    weaponRechargePercent: 0,
-    experimentalEffect1: "Cluster Capacitors",
-    experimentalEffectRechargePercent1: -0.02,
-    experimentalEffect2: "Super Conduits",
-    experimentalEffectRechargePercent2: 0.04
-};
-
-const distroWF: DistributorEngineeringData = {
-    effectName: "Weapon Focused",
-    weaponRechargePercent: 0.44,
-    experimentalEffect1: "Cluster Capacitors",
-    experimentalEffectRechargePercent1: 0.411,
-    experimentalEffect2: "Super Conduits",
-    experimentalEffectRechargePercent2: 0.498
-};
+// TODO: Address how to handle Guardian distributors. Maybe a toggle/checkbox that bypasses the setup flow
+export const distributorClasses: string[] = [
+    'A', 'B', 'C', 'D', 'E'
+];

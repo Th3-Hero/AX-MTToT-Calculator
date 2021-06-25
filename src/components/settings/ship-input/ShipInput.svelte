@@ -4,16 +4,10 @@
     import { selectedWeapons } from '../../../typescript/store';
 </script>
 
-<h2>Weapon Selection</h2>
-{#each $selectedWeapons as weapon}
-    <WeaponSelector {weapon}/>
+<h2 class="mb-1">Weapon Selection</h2>
+{#each $selectedWeapons as selectedWeapon}
+    <WeaponSelector {selectedWeapon}/>
 {/each}
 
 <h2>Distributor Selection</h2>
 <DistroSelector/>
-
-<style>
-    h2 {
-        margin-bottom: .1em;
-    }
-</style>

@@ -1,11 +1,15 @@
+<svelte:head>
+	<style src="./bulma.scss"></style>
+</svelte:head>
+
 <script lang="ts">
 	import SettingUi from './components/settings/SettingsUi.svelte'
 	import DataDisplay from './components/data-display/MainDataDisplay.svelte'
 	import TimeOnTargetChart from './components/time-on-target-chart/TimeOnTargetChart.svelte'
 </script>
 
-<main>
-	<div class="grid-container">
+<main class="is-flex is-justify-content-center">
+	<div class="grid-container vertically-center">
 		<div class="component-container">
 			<SettingUi/>
 		</div>
@@ -21,13 +25,12 @@
 </main>
 
 <style lang="scss">
+	.vertically-center {
+		margin-top: calc((100vh - 700px)/2);
+	}
+
 	.grid-container {
 		display: grid;
-		justify-content: center;
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%,-50%);
 		grid-template-columns: 325px 451px 325px;
 		grid-template-rows: 700px;
 	}

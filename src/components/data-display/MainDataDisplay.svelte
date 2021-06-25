@@ -5,7 +5,7 @@
 
 <!-- The spacing needs to be worked on for sure -->
 
-<h1 class="main-title">
+<h1 class="title has-text-centered mt-1">
     Minimum Theoretical <br>
     Time on Target
 </h1>
@@ -14,13 +14,3 @@
     <InfoTable {interceptor} range="1500"/>
 {/each}
 
-<style>
-    .main-title {
-		text-align: center;
-        font-size: 36px;
-	}
-
-    h1 {
-        margin-top: .25em;
-    }
-</style>

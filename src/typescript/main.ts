@@ -1,12 +1,9 @@
 // Version(major.minor.patch): 00.000.000
 import { userInputs, userSelections } from "./runtime";
-import { gaussC2Fixed } from "./data/weaponData";
 
 export function calculateMain() {
     // collectUserInputs();
     // console.log(collectUserInputs);
-    const testVar = gaussC2Fixed.weaponName;
-    console.log(testVar);
 }
 
 // function collectUserInputs() {

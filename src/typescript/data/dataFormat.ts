@@ -1,11 +1,12 @@
-export enum WeaponTypes {
-    fixed = "Fixed",
-    gimballed = "Gimballed",
-    turreted = "Turreted",
-    dumbFire = "Dumbfire"
+export enum WeaponType {
+    FIXED = "Fixed",
+    GIMBALLED = "Gimballed",
+    TURRETED = "Turreted",
+    DUMB_FIRE = "Dumbfire"
 }
 
-export interface WeaponInformationData {
+export interface WeaponInformation {
+    weaponSize: number;
     clipSize: number;
     rof: number;
     reloadTime: number;
@@ -20,30 +21,35 @@ export interface WeaponInformationData {
     premAmmoPercent: number;
 }
 
-export interface WeaponData {
+export interface AxWeapon {
     weaponName: string;
-    weaponType: WeaponTypes;
-    weaponSize: number;
-    weaponInformation: WeaponInformationData;
-}
-
-export interface GoidData {
-    name: string;
-    armourRating: number;
-    regenPerSecond: number;
-    exertHP: number;
-}
-
-export interface DistributorEngineeringData {
-    effectName: string;
-    weaponRechargePercent: number;
-    experimentalEffect1: string;
-    experimentalEffectRechargePercent1: number;
-    experimentalEffect2: string;
-    experimentalEffectRechargePercent2: number;
+    shortName: string
+    weaponType: WeaponType;
+    options: WeaponInformation[];
 }
 
 export interface SelectedWeapon {
     name: string;
+    class: number;
+}
+
+export interface Thargoid {
+    name: string;
+    armourRating: number;
+    regenPerSecond: number;
+    exertHp: number;
+}
+
+export interface Distributor {
+    size: number;
     class: string;
+    baseWeaponRecharge: number;
+    blueprint: DistributorModifier;
+    experimentEffect: DistributorModifier;
+}
+
+export interface DistributorModifier {
+    name: string;
+    shortName: string;
+    weaponRechargeModifier: number;
 }
