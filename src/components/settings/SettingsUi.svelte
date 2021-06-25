@@ -39,14 +39,17 @@
 		position: absolute;
 		transform: translate(-50%, 0%);
 		border: 2px solid $orange;
-		border-radius: 10px;
+		border-radius: 12px;
 		text-align: center;
 		font-size: 16px;
 		font-weight: bold;
+        color: $font;
+        background: $background;
 		background-image: linear-gradient(90deg, $orange 50%, transparent 0%);
 		background-position: 100%;
 		background-size: 400%;
         transition: background 500ms ease-in-out;
+        cursor: pointer;
 	}
 
     .custom-button:hover {
