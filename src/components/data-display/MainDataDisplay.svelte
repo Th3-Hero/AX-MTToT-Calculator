@@ -11,6 +11,6 @@
 </h1>
 
 {#each KNOWN_INTERCEPTOR as interceptor}
-    <InfoTable {interceptor} range="1500"/>
+    <InfoTable {interceptor}/>
 {/each}
 

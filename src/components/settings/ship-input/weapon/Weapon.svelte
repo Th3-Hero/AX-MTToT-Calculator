@@ -9,6 +9,7 @@
     export let selectedWeapon: SelectedWeapon;
 </script>
 
+<!-- svelte-ignore a11y-no-onchange -->
 <select class="dropdown-select mt-2"
         bind:value={selectedWeapon.name}
         on:change={() => selectedWeapon.class = findAxWeapon(selectedWeapon.name)?.options[0].weaponSize}>

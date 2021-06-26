@@ -12,4 +12,4 @@ const buildStarterStore = (): SelectedWeapon[] => {
 }
 
 export let selectedWeapons = writable<SelectedWeapon[]>(buildStarterStore());
-
+export let range = writable<number>(0);

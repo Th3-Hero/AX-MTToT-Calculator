@@ -1,12 +1,13 @@
 <script lang="ts">
+    import { range } from '../../../typescript/store';
+
     export let interceptor: string;
-    export let range: number;
 </script>
 
 <table class="table is-hoverable is-fullwidth mb-1">
     <thead>
         <tr>
-            <th>{interceptor} @ {range}m</th>
+            <th>{interceptor} @ {$range || 0}m</th>
             <th>Basic</th>
             <th>Standard</th>
             <th>Premium</th>
