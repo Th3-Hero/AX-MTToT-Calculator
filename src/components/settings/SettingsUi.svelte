@@ -25,7 +25,7 @@
         <input type="text" id="sinks" class="text-input small-text-input has-text-centered p-0" placeholder="0">
 
         <h2 class="mb-1">Target Range</h2>
-        <input type="text" bind:value={$range} id="range" class="text-input small-text-input has-text-centered p-0" placeholder="0">
+        <input type="text" bind:value={$range} id="range" class="text-input small-text-input has-text-centered p-0" placeholder="1500">
     </div>
 
     <button class="custom-button has-text-centered is-align-self-center p-1 mt-6"
