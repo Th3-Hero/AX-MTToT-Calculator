@@ -9,5 +9,5 @@
     <WeaponSelector {selectedWeapon}/>
 {/each}
 
-<h2>Distributor Selection</h2>
+<h2 class="mb-1">Distributor Selection</h2>
 <DistroSelector/>

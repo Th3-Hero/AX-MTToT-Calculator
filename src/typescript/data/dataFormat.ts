@@ -40,12 +40,11 @@ export interface Thargoid {
     exertHp: number;
 }
 
-export interface Distributor {
+export interface SelectedDistributor {
     size: number;
     class: string;
-    baseWeaponRecharge: number;
-    blueprint: DistributorModifier;
-    experimentEffect: DistributorModifier;
+    blueprint: string;
+    experimentEffect: string;
 }
 
 export interface DistributorModifier {

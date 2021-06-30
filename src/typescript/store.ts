@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store';
-import { SelectedWeapon } from './data/dataFormat';
+import { SelectedDistributor, SelectedWeapon } from './data/dataFormat';
 import { MAX_AX_WEAPONS } from './util';
 
 const buildStarterStore = (): SelectedWeapon[] => {
@@ -13,3 +13,6 @@ const buildStarterStore = (): SelectedWeapon[] => {
 
 export let selectedWeapons = writable<SelectedWeapon[]>(buildStarterStore());
 export let range = writable<number>(1500);
+export let selectedDistributor = writable<SelectedDistributor>(
+    { size: 1, class: 'A', blueprint: '', experimentEffect: '' });
+export let heatsinks = writable<number>(0);

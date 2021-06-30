@@ -1,6 +1,7 @@
 <script>
     import { KNOWN_INTERCEPTOR } from '../../typescript/util';
     import InterceptorData from './interceptor-data/InterceptorData.svelte';
+    import { selectedDistributor } from '../../typescript/store';
 
     let shipName = '';
     let delay = 2050; // Delay for testing, will be passed in later by SDPS
@@ -8,6 +9,19 @@
 
     let selectedAccuracy;
     let selectedAmmo;
+
+    const distributorEngineering = () => {
+        const blueprint = $selectedDistributor.blueprint;
+        const effect = $selectedDistributor.experimentEffect;
+
+        if ($selectedDistributor.class === 'G') {
+            return 'Guardian';
+        } else if (!blueprint) {
+            return 'Not engineered';
+        }
+
+        return `${blueprint.toUpperCase()} + ${effect ? effect.toUpperCase() : 'No effect'}`;
+    }
 </script>
 
 <!--
@@ -40,8 +54,12 @@
     <div>
         <div class="create-a-chart-container">
             <div class="ml-2 mt-3">
-                <div class="has-font-20 mt-1">{shipName || "Ship Name"}</div>
-                <div class="has-font-20 mt-1">Distributor</div> <!-- This will need to be passed in later when we have collection for distro -->
+                <div class="has-font-20 mt-1">{shipName || "AX Ship"}</div>
+                <div class="has-font-20 mt-1">
+                    {`${$selectedDistributor.size}${$selectedDistributor.class}
+                     distributor (${distributorEngineering()})`
+                    }
+                </div>
                 <div class="has-font-20 mt-1">{selectedAmmo} ammo</div>
                 <div class="has-font-20 mt-1">{selectedAccuracy}% accuracy</div>
                 <div class="has-font-20 mt-1">{delay}ms ({bpm} BPM)</div>
