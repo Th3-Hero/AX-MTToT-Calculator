@@ -1,10 +1,10 @@
 <script>
     import { KNOWN_INTERCEPTOR } from '../../typescript/util';
     import InterceptorData from './interceptor-data/InterceptorData.svelte';
-    import { selectedDistributor } from '../../typescript/store';
+    import { selectedDistributor, sdpsExtraDelay } from '../../typescript/store';
 
     let shipName = '';
-    let delay = 2050; // Delay for testing, will be passed in later by SDPS
+    $: delay = Math.round($sdpsExtraDelay) + 2050;
     $: bpm = Math.round(60000 / delay * 4);
 
     let selectedAccuracy;

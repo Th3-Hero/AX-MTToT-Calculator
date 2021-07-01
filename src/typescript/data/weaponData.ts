@@ -2,8 +2,17 @@ import { AxWeapon, WeaponType } from "./dataFormat";
 
 // TODO: There is no great representation of fixed vs turret right now.
 //  Having to maintain multiple objects is not ideal, but it will work for a short time.
+//  Agreed one object would be better especially if we add weapons it will be a nightmare currently - Hero
 
-const gauss: AxWeapon = {
+// TODO: We may also want to add more weapons in future to have all AX weapon classes
+// However that would need to be done after we rework the weapon data storeage
+
+// TODO: I need to redo how gauss gets it rate of fire as it's tied to delay math wise (rof = 1 / (2.05 + delay / 1000))
+
+// distroDraw only matters for gauss but I put it in for the others as well
+// however the other weapons fire more then 1 shot per second 
+// so it would need to be used alongside with rate of fire if we were to use draw for something else in the future
+export const gauss: AxWeapon = {
     weaponName: 'Guardian Gauss Cannon',
     shortName: 'gauss',
     weaponType: WeaponType.FIXED,
@@ -13,6 +22,7 @@ const gauss: AxWeapon = {
             clipSize: 80,
             rof: 0.487804878,
             reloadTime: 4,
+            distroDraw: 3.8,
             damage: 40,
             axPercent: 50,
             axDamage: 20.00,
@@ -28,6 +38,7 @@ const gauss: AxWeapon = {
             clipSize: 80,
             rof: 0.487804878,
             reloadTime: 4,
+            distroDraw: 7.2,
             damage: 70,
             axPercent: 50,
             axDamage: 35.00,
@@ -51,6 +62,7 @@ const plasma: AxWeapon = {
             clipSize: 15,
             rof: 0.5,
             reloadTime: 3,
+            distroDraw: 0.68,
             damage: 51,
             axPercent: 50,
             axDamage: 25.50,
@@ -66,6 +78,7 @@ const plasma: AxWeapon = {
             clipSize: 15,
             rof: 0.5555555556,
             reloadTime: 3,
+            distroDraw: 1.25,
             damage: 119,
             axPercent: 50,
             axDamage: 59.50,
@@ -89,6 +102,7 @@ const shard: AxWeapon = {
             clipSize: 5,
             rof: 1.667,
             reloadTime: 5,
+            distroDraw: 0.42,
             damage: 43.68,
             axPercent: 50,
             axDamage: 21.84,
@@ -104,6 +118,7 @@ const shard: AxWeapon = {
             clipSize: 5,
             rof: 1.667,
             reloadTime: 5,
+            distroDraw: 0.65,
             damage: 81.24,
             axPercent: 50,
             axDamage: 40.62,
@@ -119,6 +134,7 @@ const shard: AxWeapon = {
             clipSize: 5,
             rof: 1.667,
             reloadTime: 5,
+            distroDraw: 1.4,
             damage: 114,
             axPercent: 50,
             axDamage: 57.00,
@@ -142,6 +158,7 @@ const axmc: AxWeapon = {
             clipSize: 100,
             rof: 7.14,
             reloadTime: 4,
+            distroDraw: 0.11,
             damage: 3.31,
             axPercent: 66.16,
             axDamage: 2.19,
@@ -157,6 +174,7 @@ const axmc: AxWeapon = {
             clipSize: 100,
             rof: 5.88,
             reloadTime: 4,
+            distroDraw: 0.18,
             damage: 6.12,
             axPercent: 64.19,
             axDamage: 3.92,
@@ -180,6 +198,7 @@ const axmct: AxWeapon = {
             clipSize: 90,
             rof: 6.25,
             reloadTime: 4,
+            distroDraw: 0.06,
             damage: 3.31,
             axPercent: 64.19,
             axDamage: 2.12,
@@ -203,6 +222,7 @@ const axmr: AxWeapon = {
             clipSize: 8,
             rof: 0.50,
             reloadTime: 5,
+            distroDraw: 0.14,
             damage: 64.00,
             axPercent: 57.81,
             axDamage: 37.00,
@@ -218,6 +238,7 @@ const axmr: AxWeapon = {
             clipSize: 12,
             rof: 0.50,
             reloadTime: 5,
+            distroDraw: 0.24,
             damage: 64.00,
             axPercent: 57.81,
             axDamage: 37.00,

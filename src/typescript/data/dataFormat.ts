@@ -10,6 +10,7 @@ export interface WeaponInformation {
     clipSize: number;
     rof: number;
     reloadTime: number;
+    distroDraw: number;
     damage: number;
     axPercent: number;
     axDamage: number;

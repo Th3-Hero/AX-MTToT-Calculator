@@ -17,7 +17,10 @@
     <!-- svelte-ignore a11y-no-onchange -->
     <select class="dropdown-select mt-1" bind:value={$selectedDistributor.class}
             on:change={() => {
-                if ($selectedDistributor.class === 'G') { $selectedDistributor.blueprint = ''; }
+                if ($selectedDistributor.class === 'G') { 
+                    $selectedDistributor.blueprint = '';
+                    $selectedDistributor.experimentEffect = ''; 
+                }
             }}>
         {#each distributorClasses as distributorClass}
             <option value="{distributorClass}">{distributorClass}</option>
@@ -41,6 +44,7 @@
         {/each}
     </select>
 
+    <!-- We should consider seeing if we can just define the space and hide the engineering when guardian is selected -->
     <select class="dropdown-select mt-1" bind:value={$selectedDistributor.experimentEffect}
             disabled={!$selectedDistributor.blueprint}>
         <option value="">No effect</option>
