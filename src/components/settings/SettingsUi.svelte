@@ -1,59 +1,50 @@
 <script lang="ts">
     import ShipInput from './ship-input/ShipInput.svelte';
     import ShipImport from './ship-import/ShipImport.svelte';
-    import { range, heatsinks, selectedWeapons, sdpsExtraDelay, selectedDistributor } from '../../typescript/store';
+    import {
+        range,
+        heatsinks,
+        selectedWeapons,
+        sdpsExtraDelay,
+        selectedDistributor
+    } from '../../typescript/store';
     import { gauss } from '../../typescript/data/weaponData'
-    import { distributorRecharge, distributorBlueprints, distributorExperimentEffects } from '../../typescript/data/distributorData'
+    import {
+        distributorRecharge,
+        distributorBlueprints,
+        distributorExperimentEffects
+    } from '../../typescript/data/distributorData'
+    import type { DistributorModifier } from '../../typescript/data/dataFormat';
 
     // Until importing is implemented, always use manual input
     let isImport = false;
 
-    function mainSDPSCalculations () {
+    const calculateSdps = (): void => {
         let draw = 0;
-        let extraDelay = 0;
-        for (let weapon of $selectedWeapons) {
-            if (weapon.name !== "gauss") {
-                continue;
-            }
-            for (let gaussClassList of gauss.options) {
-                if (weapon.class !== gaussClassList.weaponSize) {
-                    continue;
-                }
-                draw += gaussClassList.distroDraw;
-            }
+        $selectedWeapons.filter(selectedWeapon => selectedWeapon.name === 'gauss')
+                        .forEach(selectedWeapon => {
+                            const weapon = gauss.options.find(option => option.weaponSize === selectedWeapon.class);
+                            draw += weapon.distroDraw
+                        });
+
+        const distributor = `${ $selectedDistributor.size }${ $selectedDistributor.class }`;
+        let weaponRecharge = distributorRecharge[distributor];
+        weaponRecharge = applyModifier(weaponRecharge, distributorBlueprints, $selectedDistributor.blueprint);
+        if ($selectedDistributor.blueprint) {
+            weaponRecharge = applyModifier(weaponRecharge, distributorExperimentEffects, $selectedDistributor.experimentEffect);
         }
 
-        let distro = `${ $selectedDistributor.size }${ $selectedDistributor.class }`;
-        let distroRecharge = distributorRecharge[distro];
-        for (let blueprint of distributorBlueprints) {
-            if (blueprint.shortName !== $selectedDistributor.blueprint) {
-                continue;
-            }
-            let modifier = distributorRecharge[distro] * blueprint.weaponRechargeModifier;
-            distroRecharge = distributorRecharge[distro] + modifier;
+        const delay = ((draw / (weaponRecharge + (2 * $heatsinks))) * 1000) - 2050;
+        $sdpsExtraDelay = delay < 0 ? 0 : delay;
+    };
+
+    const applyModifier = (weaponRecharge: number, toSearch: DistributorModifier[], modifierName: string): number => {
+        if (!modifierName) {
+            return weaponRecharge;
         }
-
-        for (let effect of distributorExperimentEffects) {
-            if (effect.shortName !== $selectedDistributor.experimentEffect) {
-                continue;
-            }
-            let modifier = distroRecharge * effect.weaponRechargeModifier;
-            distroRecharge = distroRecharge + modifier;
-        }
-
-        // I did a good bit of testing and it handels this well every time now
-        // For some reason it would add 2 to distroRecharge before multiplying the store but only once in a while
-        // I don't think it likes BEDMAS with stores (good note for the future)
-        extraDelay = draw / (distroRecharge + (2 * $heatsinks)) * 1000 - 2050;
-
-        if (extraDelay < 0) {
-            extraDelay = 0;
-        }
-        
-        $sdpsExtraDelay = extraDelay;
-
-    }
-
+        const modifier = toSearch.find(modifier => modifier.shortName === modifierName);
+        return weaponRecharge * (1.0 + modifier.weaponRechargeModifier);
+    };
 </script>
 
 <div class="is-flex is-flex-direction-column">
@@ -73,29 +64,10 @@
     </div>
 </div>
 
-<button on:click={mainSDPSCalculations}>Test</button>
+<button on:click={calculateSdps}>Test</button>
 
 <style lang="scss">
     @import 'src/theme';
-
-    // custom-button stuff is now unused if you left these for a reason keep them otherwise out they go
-    // If they are being kept for the create a chart lets move them there for now
-	.custom-button {
-		width: 125px;
-		border: 2px solid $orange;
-		border-radius: 12px;
-		font-size: 16px;
-		font-weight: bold;
-        color: $font;
-        background: linear-gradient(90deg, $orange 50%, transparent 0%) 100%;
-        background-size: 400%;
-        transition: background 500ms ease-in-out;
-        cursor: pointer;
-	}
-
-    .custom-button:hover {
-        background-position: 0;
-    }
 
     .small-text-input {
         width: 50px;
