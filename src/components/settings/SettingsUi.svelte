@@ -8,19 +8,18 @@
     // Until importing is implemented, always use manual input
     let isImport = false;
 
-    // TODO: Fix var naming
     function mainSDPSCalculations () {
         let draw = 0;
         let extraDelay = 0;
-        for (let selectedWeaponObj of $selectedWeapons) {
-            if (selectedWeaponObj.name !== "gauss") {
+        for (let weapon of $selectedWeapons) {
+            if (weapon.name !== "gauss") {
                 continue;
             }
-            for (let gaussOptionsObject of gauss.options) {
-                if (selectedWeaponObj.class !== gaussOptionsObject.weaponSize) {
+            for (let gaussClassList of gauss.options) {
+                if (weapon.class !== gaussClassList.weaponSize) {
                     continue;
                 }
-                draw += gaussOptionsObject.distroDraw;
+                draw += gaussClassList.distroDraw;
             }
         }
 
@@ -42,7 +41,10 @@
             distroRecharge = distroRecharge + modifier;
         }
 
-        extraDelay = draw / (distroRecharge + 2 * $heatsinks) * 1000 - 2050;
+        // I did a good bit of testing and it handels this well every time now
+        // For some reason it would add 2 to distroRecharge before multiplying the store but only once in a while
+        // I don't think it likes BEDMAS with stores (good note for the future)
+        extraDelay = draw / (distroRecharge + (2 * $heatsinks)) * 1000 - 2050;
 
         if (extraDelay < 0) {
             extraDelay = 0;
