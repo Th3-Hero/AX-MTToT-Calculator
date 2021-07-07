@@ -7,11 +7,12 @@ import { AxWeapon, WeaponType } from "./dataFormat";
 // TODO: We may also want to add more weapons in future to have all AX weapon classes
 // However that would need to be done after we rework the weapon data storeage
 
-// TODO: I need to redo how gauss gets it rate of fire as it's tied to delay math wise (rof = 1 / (2.05 + delay / 1000))
-
 // distroDraw only matters for gauss but I put it in for the others as well
 // however the other weapons fire more then 1 shot per second 
 // so it would need to be used alongside with rate of fire if we were to use draw for something else in the future
+
+// I don't beleve storeing values in the weapon itself is the greatest practice, however for this type of-
+// project it would be a large amount more effort to do it another way
 export const gauss: AxWeapon = {
     weaponName: 'Guardian Gauss Cannon',
     shortName: 'gauss',
@@ -27,8 +28,10 @@ export const gauss: AxWeapon = {
             axPercent: 50,
             axDamage: 20.00,
             sustainedAxDps: 9.52,
+            nDps: 0,
             armourPierce: 140,
             falloffRange: 1500,
+            falloffFactor: 1,
             maxRange: 3000,
             stdAmmoPercent: 1.15,
             premAmmoPercent: 1.30
@@ -43,8 +46,10 @@ export const gauss: AxWeapon = {
             axPercent: 50,
             axDamage: 35.00,
             sustainedAxDps: 16.67,
+            nDps: 0,
             armourPierce: 140,
             falloffRange: 1500,
+            falloffFactor: 1,
             maxRange: 3000,
             stdAmmoPercent: 1.15,
             premAmmoPercent: 1.30
@@ -67,8 +72,10 @@ const plasma: AxWeapon = {
             axPercent: 50,
             axDamage: 25.50,
             sustainedAxDps: 11.59,
+            nDps: 0,
             armourPierce: 65,
             falloffRange: 1000,
+            falloffFactor: 1,
             maxRange: 3000,
             stdAmmoPercent: 1.15,
             premAmmoPercent: 1.30
@@ -83,8 +90,10 @@ const plasma: AxWeapon = {
             axPercent: 50,
             axDamage: 59.50,
             sustainedAxDps: 29.75,
+            nDps: 0,
             armourPierce: 95,
             falloffRange: 1000,
+            falloffFactor: 1,
             maxRange: 3000,
             stdAmmoPercent: 1.15,
             premAmmoPercent: 1.30
@@ -107,8 +116,10 @@ const shard: AxWeapon = {
             axPercent: 50,
             axDamage: 21.84,
             sustainedAxDps: 13.65,
+            nDps: 0,
             armourPierce: 30,
             falloffRange: 1700,
+            falloffFactor: 1,
             maxRange: 1700,
             stdAmmoPercent: 1.15,
             premAmmoPercent: 1.30
@@ -123,8 +134,10 @@ const shard: AxWeapon = {
             axPercent: 50,
             axDamage: 40.62,
             sustainedAxDps: 25.39,
+            nDps: 0,
             armourPierce: 45,
             falloffRange: 1700,
+            falloffFactor: 1,
             maxRange: 1700,
             stdAmmoPercent: 1.15,
             premAmmoPercent: 1.30
@@ -139,8 +152,10 @@ const shard: AxWeapon = {
             axPercent: 50,
             axDamage: 57.00,
             sustainedAxDps: 35.63,
+            nDps: 0,
             armourPierce: 60,
             falloffRange: 1700,
+            falloffFactor: 1,
             maxRange: 1700,
             stdAmmoPercent: 1.15,
             premAmmoPercent: 1.30
@@ -163,8 +178,10 @@ const axmc: AxWeapon = {
             axPercent: 66.16,
             axDamage: 2.19,
             sustainedAxDps: 12.17,
+            nDps: 0,
             armourPierce: 17,
             falloffRange: 2000,
+            falloffFactor: 1,
             maxRange: 4000,
             stdAmmoPercent: 1.05,
             premAmmoPercent: 1.10
@@ -179,8 +196,10 @@ const axmc: AxWeapon = {
             axPercent: 64.19,
             axDamage: 3.92,
             sustainedAxDps: 18.69,
+            nDps: 0,
             armourPierce: 33,
             falloffRange: 2000,
+            falloffFactor: 1,
             maxRange: 4000,
             stdAmmoPercent: 1.05,
             premAmmoPercent: 1.10
@@ -203,8 +222,10 @@ const axmct: AxWeapon = {
             axPercent: 64.19,
             axDamage: 2.12,
             sustainedAxDps: 10.39,
+            nDps: 0,
             armourPierce: 33,
             falloffRange: 2000,
+            falloffFactor: 1,
             maxRange: 4000,
             stdAmmoPercent: 1.05,
             premAmmoPercent: 1.10
@@ -227,8 +248,10 @@ const axmr: AxWeapon = {
             axPercent: 57.81,
             axDamage: 37.00,
             sustainedAxDps: 14.10,
+            nDps: 0,
             armourPierce: 60,
             falloffRange: 4000,
+            falloffFactor: 1,
             maxRange: 4000,
             stdAmmoPercent: 1.05,
             premAmmoPercent: 1.10
@@ -243,8 +266,10 @@ const axmr: AxWeapon = {
             axPercent: 57.81,
             axDamage: 37.00,
             sustainedAxDps: 15.31,
+            nDps: 0,
             armourPierce: 60,
             falloffRange: 4000,
+            falloffFactor: 1,
             maxRange: 4000,
             stdAmmoPercent: 1.05,
             premAmmoPercent: 1.10

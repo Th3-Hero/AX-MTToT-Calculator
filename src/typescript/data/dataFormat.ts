@@ -15,8 +15,10 @@ export interface WeaponInformation {
     axPercent: number;
     axDamage: number;
     sustainedAxDps: number;
+    nDps: number;
     armourPierce: number;
     falloffRange: number;
+    falloffFactor: number;
     maxRange: number;
     stdAmmoPercent: number;
     premAmmoPercent: number;
@@ -52,4 +54,18 @@ export interface DistributorModifier {
     name: string;
     shortName: string;
     weaponRechargeModifier: number;
+}
+
+export interface totData {
+    adjDps: number;
+    tot100: number; 
+    tot75: number;
+    tot50: number;
+}
+
+export interface TotDataStore {
+    name: String;
+    basicAmmo: totData; 
+    standardAmmo: totData; 
+    premiumAmmo: totData; 
 }

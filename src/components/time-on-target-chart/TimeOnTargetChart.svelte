@@ -34,6 +34,9 @@
     <div class="mb-3 ml-2">
         <h1 class="mt-1 mb-0 has-text-centered">Create a Chart</h1>
 
+        <h3 class="mt-2 mb-0">Name your ship!</h3>
+        <input type="text" bind:value={shipName} class="text-input large-text-input p-0 has-text-centered" placeholder="Ship Name Here">
+
         <h3 class="mt-2 mb-0">Ammo Selection</h3>
         <select id="ammoSelectionDropdown" class="dropdown-select mt-1" bind:value={selectedAmmo}>
             <option value="Basic">Basic</option>
@@ -48,8 +51,6 @@
             <option value="50">50%</option>
         </select>
 
-        <h3 class="mt-2 mb-0">Name your ship!</h3>
-        <input type="text" bind:value={shipName} class="text-input large-text-input p-0 has-text-centered" placeholder="Ship Name Here">
     </div>
     <div>
         <div class="create-a-chart-container">
