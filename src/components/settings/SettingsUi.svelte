@@ -1,10 +1,7 @@
 <script lang="ts">
     import ShipInput from './ship-input/ShipInput.svelte';
     import ShipImport from './ship-import/ShipImport.svelte';
-    import {
-        range,
-        heatsinks
-    } from '../../typescript/store';
+    import { range, heatsinks } from '../../typescript/store';
 
     // Until importing is implemented, always use manual input
     let isImport = false;

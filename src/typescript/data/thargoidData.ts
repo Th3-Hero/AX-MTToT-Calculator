@@ -1,27 +1,27 @@
 import { Thargoid } from './dataFormat';
 
-export const cyclops: Thargoid = {
+const cyclops: Thargoid = {
     name: "Cyclops",
     armourRating: 100,
     regenPerSecond: 3.2,
     exertHp: 160
 };
 
-export const basilisk: Thargoid = {
+const basilisk: Thargoid = {
     name: "Basilisk",
     armourRating: 140,
     regenPerSecond: 7.2,
     exertHp: 360
 };
 
-export const medusa: Thargoid = {
+const medusa: Thargoid = {
     name: "Medusa",
     armourRating: 175,
     regenPerSecond: 10,
     exertHp: 500
 };
 
-export const hydra: Thargoid = {
+const hydra: Thargoid = {
     name: "Hydra",
     armourRating: 230,
     regenPerSecond: 12.8,

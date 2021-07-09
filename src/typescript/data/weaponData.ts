@@ -11,8 +11,6 @@ import { AxWeapon, WeaponType } from "./dataFormat";
 // however the other weapons fire more then 1 shot per second 
 // so it would need to be used alongside with rate of fire if we were to use draw for something else in the future
 
-// I don't beleve storeing values in the weapon itself is the greatest practice, however for this type of-
-// project it would be a large amount more effort to do it another way
 export const gauss: AxWeapon = {
     weaponName: 'Guardian Gauss Cannon',
     shortName: 'gauss',

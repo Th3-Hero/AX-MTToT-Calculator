@@ -1,5 +1,5 @@
 <script>
-    import { KNOWN_INTERCEPTOR } from '../../typescript/util';
+    import { THARGOID_TYPES } from '../../typescript/data/thargoidData'
     import InterceptorData from './interceptor-data/InterceptorData.svelte';
     import { selectedDistributor, sdpsExtraDelay } from '../../typescript/store';
 
@@ -67,8 +67,8 @@
             </div>
 
             <div class="graphic mt-4 is-justify-content-center">
-                {#each KNOWN_INTERCEPTOR.reverse() as interceptor}
-                    <InterceptorData {interceptor}/>
+                {#each THARGOID_TYPES as interceptor}
+                    <InterceptorData interceptor={interceptor.name}/>
                 {/each}
             </div>
         </div>

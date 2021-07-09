@@ -56,16 +56,16 @@ export interface DistributorModifier {
     weaponRechargeModifier: number;
 }
 
-export interface totData {
+export interface InterceptorTotData {
     adjDps: number;
-    tot100: number; 
+    tot100: number;
     tot75: number;
     tot50: number;
 }
 
-export interface TotDataStore {
-    name: String;
-    basicAmmo: totData; 
-    standardAmmo: totData; 
-    premiumAmmo: totData; 
+export interface FullTotPerInterceptor {
+    name: string;
+    basicAmmo: InterceptorTotData;
+    standardAmmo: InterceptorTotData;
+    premiumAmmo: InterceptorTotData;
 }
