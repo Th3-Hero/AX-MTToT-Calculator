@@ -15,6 +15,10 @@
         distributorExperimentEffects
     } from '../../typescript/data/distributorData'
     import { THARGOID_TYPES } from '../../typescript/data/thargoidData'
+    import { 
+        minGaussDelayMs, 
+        heatsinkWepRecharge
+    } from '../../typescript/util'
     import type { DistributorModifier, SelectedWeapon } from '../../typescript/data/dataFormat';
 
     // TODO: Can you work on making all these calculations dynamic so they happen whenever anything is changed
@@ -39,7 +43,7 @@
             weaponRecharge = applyModifier(weaponRecharge, distributorExperimentEffects, $selectedDistributor.experimentEffect);
         }
 
-        const delay = ((totalDraw / (weaponRecharge + (2 * $heatsinks))) * 1000) - 2050;
+        const delay = ((totalDraw / (weaponRecharge + (heatsinkWepRecharge * $heatsinks))) * 1000) - minGaussDelayMs;
         $sdpsExtraDelay = delay < 0 ? 0 : delay;
         gaussRof();
     };
@@ -66,20 +70,20 @@
         for (const thargoid of THARGOID_TYPES) {
             const interceptorTotData = $fullInterceptorTotData.find(interceptorData => thargoid.name === interceptorData.name);
 
-            let adjDpsBasicAmmo = 0;
-            let adjDpsStandardAmmo = 0;
-            let adjDpsPremiumAmmo = 0;
+            let adjDpsBasic = 0;
+            let adjDpsStandard = 0;
+            let adjDpsPremium = 0;
             const uniqueWeapons = filteredWeapons.filter((weapon, index) =>
                 filteredWeapons.findIndex(selectedWeapon => selectedWeapon.name === weapon.name && selectedWeapon.class === weapon.class) === index);
             for (const selectedWeapon of uniqueWeapons) {
                 const weaponOption = axWeaponsFind(selectedWeapon);
-                adjDpsBasicAmmo += weaponOption.nDps * (weaponOption.armourPierce / thargoid.armourRating) * weaponOption.falloffFactor;
-                adjDpsStandardAmmo = adjDpsBasicAmmo * weaponOption.stdAmmoPercent;
-                adjDpsPremiumAmmo = adjDpsStandardAmmo * weaponOption.premAmmoPercent;
+                adjDpsBasic += weaponOption.nDps * (weaponOption.armourPierce / thargoid.armourRating) * weaponOption.falloffFactor;
+                adjDpsStandard = adjDpsBasic * weaponOption.stdAmmoPercent;
+                adjDpsPremium = adjDpsStandard * weaponOption.premAmmoPercent;
             }
-            interceptorTotData.basicAmmo.adjDps = adjDpsBasicAmmo;
-            interceptorTotData.standardAmmo.adjDps = adjDpsStandardAmmo;
-            interceptorTotData.premiumAmmo.adjDps = adjDpsPremiumAmmo;
+            interceptorTotData.basicAmmo.adjDps = adjDpsBasic;
+            interceptorTotData.standardAmmo.adjDps = adjDpsStandard;
+            interceptorTotData.premiumAmmo.adjDps = adjDpsPremium;
 
             const ammoTypes = [interceptorTotData.basicAmmo, interceptorTotData.standardAmmo, interceptorTotData.premiumAmmo];
 
@@ -92,7 +96,7 @@
         }
     };
 
-    const resetCalculations = (filteredWeapons): void => {
+    const resetCalculations = (filteredWeapons: SelectedWeapon[]): void => {
         for (const selectedWeapon of filteredWeapons) {
             const correctWeapon = axWeaponsFind(selectedWeapon);
             correctWeapon.nDps = 0;
@@ -100,7 +104,7 @@
         }
     };
 
-    const weaponCalculations = (filteredWeapons): void => {
+    const weaponCalculations = (filteredWeapons: SelectedWeapon[]): void => {
         for (const selectedWeapon of filteredWeapons) {
             const correctWeapon = axWeaponsFind(selectedWeapon);
             correctWeapon.nDps += correctWeapon.sustainedAxDps;
@@ -131,6 +135,6 @@
 <button on:click={calculateTot}>Test</button> <!-- This button can be removed when it's dynamic -->
 
 {#each THARGOID_TYPES as interceptor}
-    <InfoTable interceptor={interceptor.name}/>
+    <InfoTable {interceptor}/>
 {/each}
 
