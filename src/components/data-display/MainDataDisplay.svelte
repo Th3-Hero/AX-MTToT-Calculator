@@ -16,8 +16,8 @@
     } from '../../typescript/data/distributorData'
     import { THARGOID_TYPES } from '../../typescript/data/thargoidData'
     import { 
-        minGaussDelayMs, 
-        heatsinkWepRecharge
+        MIN_GAUSS_DELAY_MS, 
+        HEATSINK_WEP_RECHARGE
     } from '../../typescript/util'
     import type { DistributorModifier, SelectedWeapon } from '../../typescript/data/dataFormat';
 
@@ -43,7 +43,7 @@
             weaponRecharge = applyModifier(weaponRecharge, distributorExperimentEffects, $selectedDistributor.experimentEffect);
         }
 
-        const delay = ((totalDraw / (weaponRecharge + (heatsinkWepRecharge * $heatsinks))) * 1000) - minGaussDelayMs;
+        const delay = ((totalDraw / (weaponRecharge + (HEATSINK_WEP_RECHARGE * $heatsinks))) * 1000) - MIN_GAUSS_DELAY_MS;
         $sdpsExtraDelay = delay < 0 ? 0 : delay;
         gaussRof();
     };
@@ -77,9 +77,10 @@
                 filteredWeapons.findIndex(selectedWeapon => selectedWeapon.name === weapon.name && selectedWeapon.class === weapon.class) === index);
             for (const selectedWeapon of uniqueWeapons) {
                 const weaponOption = axWeaponsFind(selectedWeapon);
-                adjDpsBasic += weaponOption.nDps * (weaponOption.armourPierce / thargoid.armourRating) * weaponOption.falloffFactor;
-                adjDpsStandard = adjDpsBasic * weaponOption.stdAmmoPercent;
-                adjDpsPremium = adjDpsStandard * weaponOption.premAmmoPercent;
+                const adjDpsMath = weaponOption.nDps * (weaponOption.armourPierce / thargoid.armourRating) * weaponOption.falloffFactor;
+                adjDpsBasic += adjDpsMath;
+                adjDpsStandard += adjDpsMath * weaponOption.stdAmmoPercent;
+                adjDpsPremium += adjDpsMath * weaponOption.premAmmoPercent;
             }
             interceptorTotData.basicAmmo.adjDps = adjDpsBasic;
             interceptorTotData.standardAmmo.adjDps = adjDpsStandard;

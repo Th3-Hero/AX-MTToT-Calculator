@@ -1,12 +1,12 @@
-<script>
+<script lang="ts">
     import { THARGOID_TYPES } from '../../typescript/data/thargoidData'
     import InterceptorData from './interceptor-data/InterceptorData.svelte';
     import { selectedDistributor, sdpsExtraDelay } from '../../typescript/store';
-    import { minGaussDelayMs, msPerMinute } from '../../typescript/util'
+    import { MIN_GAUSS_DELAY_MS, MS_PER_MINUTE } from '../../typescript/util'
 
     let shipName = '';
-    $: delay = Math.round($sdpsExtraDelay) + minGaussDelayMs;
-    $: bpm = Math.round(msPerMinute / delay * 4);
+    $: delay = Math.round($sdpsExtraDelay) + MIN_GAUSS_DELAY_MS;
+    $: bpm = Math.round(MS_PER_MINUTE / delay * 4);
 
     let selectedAccuracy;
     let selectedAmmo;
