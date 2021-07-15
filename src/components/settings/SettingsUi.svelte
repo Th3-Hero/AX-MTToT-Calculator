@@ -6,6 +6,18 @@
     // Until importing is implemented, always use manual input
     let isImport = false;
 
+    const inputCheck = () => {
+        let heatsinkInput = Number($heatsinks);
+        let rangeInput = Number($range);
+        if (!Number.isInteger(heatsinkInput) || heatsinkInput < 0 || heatsinkInput > 8) {
+            $heatsinks = 0;
+        }
+        // 6k may need to be changed if we add new shard cannon
+        if (!Number.isInteger(rangeInput) || rangeInput < 0 || rangeInput > 6000) {
+            $range = 1500;
+        }
+    }
+
 </script>
 
 <div class="is-flex is-flex-direction-column">
@@ -18,10 +30,10 @@
         {/if}
 
         <h2 class="mb-1">Active Heatsinks</h2>
-        <input type="text" bind:value={$heatsinks} class="text-input small-text-input has-text-centered p-0" placeholder="0">
+        <input type="text" bind:value={$heatsinks} on:change={inputCheck} class="text-input small-text-input has-text-centered p-0" placeholder="0">
 
         <h2 class="mb-1">Target Range</h2>
-        <input type="text" bind:value={$range} id="range" class="text-input small-text-input has-text-centered p-0" placeholder="1500">
+        <input type="text" bind:value={$range} on:change={inputCheck} id="range" class="text-input small-text-input has-text-centered p-0" placeholder="1500">
     </div>
 </div>
 

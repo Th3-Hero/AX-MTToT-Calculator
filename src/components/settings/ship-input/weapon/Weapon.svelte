@@ -7,7 +7,7 @@
         return AX_WEAPONS.find(axWeapon => axWeapon.shortName === weaponName);
     };
 
-    export let index: number;
+    export let index: string;
 
     $: selectedWeapon = $selectedWeapons[index];
 
@@ -29,6 +29,7 @@
     {/each}
 </select>
 
+<!-- svelte-ignore a11y-no-onchange -->
 {#if selectedWeapon.name}
     <select class="dropdown-select mt-2"
             bind:value={selectedWeapon.class}
