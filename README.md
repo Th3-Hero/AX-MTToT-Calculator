@@ -2,7 +2,7 @@
 This is a calculator designed to provide the TToT for your ship.
 
 ## Links
-[~~GitHub Pages Link~~]() \
+[GitHub Pages (Calculator itself)](https://th3-hero.github.io/AX-MTToT-Calculator/) \
 [Project board](https://github.com/Th3-Hero/AX-MTToT-Calculator/projects/1)
 
 ## Development:
