@@ -1,8 +1,8 @@
 export enum WeaponType {
-    FIXED = "Fixed",
-    GIMBALLED = "Gimballed",
-    TURRETED = "Turreted",
-    DUMB_FIRE = "Dumbfire"
+    FIXED = 'Fixed',
+    GIMBALLED = 'Gimballed',
+    TURRETED = 'Turreted',
+    DUMB_FIRE = 'Dumbfire'
 }
 
 export interface WeaponInformation {
@@ -36,6 +36,10 @@ export interface SelectedWeapon {
     class: number;
 }
 
+export interface SelectedWeapons {
+    [name: number]: SelectedWeapon;
+}
+
 export interface Thargoid {
     name: string;
     armourRating: number;
@@ -56,16 +60,19 @@ export interface DistributorModifier {
     weaponRechargeModifier: number;
 }
 
-export interface InterceptorTotData {
+export interface AmmoToTData {
     adjDps: number;
-    tot100: number;
-    tot75: number;
-    tot50: number;
+    tot100: string;
+    tot75: string;
+    tot50: string;
 }
 
-export interface FullTotPerInterceptor {
-    name: string;
-    basicAmmo: InterceptorTotData;
-    standardAmmo: InterceptorTotData;
-    premiumAmmo: InterceptorTotData;
+export interface InterceptorTotData {
+    basicAmmo: AmmoToTData;
+    standardAmmo: AmmoToTData;
+    premiumAmmo: AmmoToTData;
+}
+
+export interface TimeOnTargetData {
+    [name: string]: InterceptorTotData;
 }

@@ -1,10 +1,16 @@
 <script lang="ts">
-    export let interceptor
+    import { timeOnTargetData } from '../../../typescript/store';
+
+    export let interceptor: string;
+    export let accuracy: string;
+    export let ammo: string;
+
+    $: totData = $timeOnTargetData[interceptor];
 </script>
 
 <div class="is-relative">
     <img alt="{interceptor}" class="image" src="images/{interceptor}_Outline.png">
-    <div class="graphic-text has-text-centered">0</div>
+    <div class="graphic-text has-text-centered">{totData[`${ ammo.toLowerCase() }Ammo`][`tot${ accuracy }`]}</div>
 </div>
 
 <style>

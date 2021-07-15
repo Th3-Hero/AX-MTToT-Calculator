@@ -3,11 +3,11 @@
     import {
         range,
         heatsinks,
-        selectedWeapons, 
-        sdpsExtraDelay, 
+        selectedWeapons,
+        sdpsExtraDelay,
         selectedDistributor,
-        fullInterceptorTotData
-    } from '../../typescript/store'
+        timeOnTargetData, setEmptyTotStore
+    } from "../../typescript/store";
     import { gauss, AX_WEAPONS } from '../../typescript/data/weaponData'
     import {
         distributorRecharge,
@@ -15,26 +15,40 @@
         distributorExperimentEffects
     } from '../../typescript/data/distributorData'
     import { THARGOID_TYPES } from '../../typescript/data/thargoidData'
-    import { 
-        MIN_GAUSS_DELAY_MS, 
+    import {
+        MIN_GAUSS_DELAY_MS,
         HEATSINK_WEP_RECHARGE
     } from '../../typescript/util'
-    import type { DistributorModifier, SelectedWeapon } from '../../typescript/data/dataFormat';
+    import type {
+        AmmoToTData,
+        DistributorModifier,
+        SelectedWeapon,
+        WeaponInformation
+    } from '../../typescript/data/dataFormat';
 
-    // TODO: Can you work on making all these calculations dynamic so they happen whenever anything is changed
-    // calculateSdps can call calculateTot if it makes it better, just need to make sure Sdps happens first
+    const fireCalculation = (): void => {
+        const filteredWeapons: SelectedWeapon[] = Object.values($selectedWeapons).filter(selectedWeapon => selectedWeapon.name);
+        if (filteredWeapons.length === 0) {
+            $timeOnTargetData = setEmptyTotStore();
+            return;
+        }
 
-    // You can remove comments as you check this over and shit on me
-    // Don't shit on my var names to hard, I know some are meh but it's the hardest part of this project is making names
+        calculateTot();
+    }
 
-    const calculateSdps = (): void => {
-        const filteredWeapons: SelectedWeapon[] = $selectedWeapons.filter(selectedWeapon => selectedWeapon.name);
+    // Shorthand for subscribing to these stores. On change, they fire the method
+    $: $selectedWeapons, fireCalculation();
+    $: $selectedDistributor, fireCalculation();
+    $: $range, fireCalculation();
+    $: $heatsinks, fireCalculation();
+
+    const calculateSdps = (weapons: SelectedWeapon[]): void => {
         let totalDraw = 0;
-        filteredWeapons.filter(selectedWeapon => selectedWeapon.name === 'gauss')
-                        .forEach(selectedWeapon => {
-                            const weapon = gauss.options.find(option => option.weaponSize === selectedWeapon.class);
-                            totalDraw += weapon.distroDraw
-                        });
+        weapons.filter(selectedWeapon => selectedWeapon.name === 'gauss')
+               .forEach(selectedWeapon => {
+                   const weapon = gauss.options.find(option => option.weaponSize === selectedWeapon.class);
+                   totalDraw += weapon.distroDraw
+               });
 
         const distributor = `${ $selectedDistributor.size }${ $selectedDistributor.class }`;
         let weaponRecharge = distributorRecharge[distributor];
@@ -45,7 +59,7 @@
 
         const delay = ((totalDraw / (weaponRecharge + (HEATSINK_WEP_RECHARGE * $heatsinks))) * 1000) - MIN_GAUSS_DELAY_MS;
         $sdpsExtraDelay = delay < 0 ? 0 : delay;
-        gaussRof();
+        gaussDamageOutput();
     };
 
     const applyModifier = (weaponRecharge: number, toSearch: DistributorModifier[], modifierName: string): number => {
@@ -56,19 +70,23 @@
         return weaponRecharge * (1.0 + modifier.weaponRechargeModifier);
     };
 
-    const gaussRof = (): void => {
+    const gaussDamageOutput = (): void => {
         gauss.options.forEach(option => {
-            option.rof = 1 / (2.05 + ($sdpsExtraDelay / 1000));
+            option.rof = 1 / ((MIN_GAUSS_DELAY_MS + $sdpsExtraDelay) / 1000);
+            option.sustainedAxDps = (option.clipSize / option.rof) /
+                ((option.clipSize / option.rof) + option.reloadTime) * option.axDamage * option.rof;
         });
     };
 
-
     const calculateTot = (): void => {
-        const filteredWeapons: SelectedWeapon[] = $selectedWeapons.filter(selectedWeapon => selectedWeapon.name);
+        const filteredWeapons: SelectedWeapon[] = Object.values($selectedWeapons).filter(selectedWeapon => selectedWeapon.name);
+
+        calculateSdps(filteredWeapons);
         resetCalculations(filteredWeapons);
         weaponCalculations(filteredWeapons);
+
         for (const thargoid of THARGOID_TYPES) {
-            const interceptorTotData = $fullInterceptorTotData.find(interceptorData => thargoid.name === interceptorData.name);
+            let interceptorTotData = $timeOnTargetData[thargoid.name];
 
             let adjDpsBasic = 0;
             let adjDpsStandard = 0;
@@ -77,10 +95,10 @@
                 filteredWeapons.findIndex(selectedWeapon => selectedWeapon.name === weapon.name && selectedWeapon.class === weapon.class) === index);
             for (const selectedWeapon of uniqueWeapons) {
                 const weaponOption = axWeaponsFind(selectedWeapon);
-                const adjDpsMath = weaponOption.nDps * (weaponOption.armourPierce / thargoid.armourRating) * weaponOption.falloffFactor;
-                adjDpsBasic += adjDpsMath;
-                adjDpsStandard += adjDpsMath * weaponOption.stdAmmoPercent;
-                adjDpsPremium += adjDpsMath * weaponOption.premAmmoPercent;
+                const adjDps = weaponOption.nDps * (weaponOption.armourPierce / thargoid.armourRating) * weaponOption.falloffFactor;
+                adjDpsBasic += adjDps;
+                adjDpsStandard += adjDps * weaponOption.stdAmmoPercent;
+                adjDpsPremium += adjDps * weaponOption.premAmmoPercent;
             }
             interceptorTotData.basicAmmo.adjDps = adjDpsBasic;
             interceptorTotData.standardAmmo.adjDps = adjDpsStandard;
@@ -90,40 +108,52 @@
 
             const exertHP = thargoid.exertHp;
             for (const ammo of ammoTypes) {
-                ammo.tot100 = exertHP / (ammo.adjDps - thargoid.regenPerSecond);
-                ammo.tot75 = exertHP / (ammo.adjDps * 0.75 - thargoid.regenPerSecond);
-                ammo.tot50 = exertHP / (ammo.adjDps * 0.50 - thargoid.regenPerSecond);
+                ammo.tot100 = (exertHP / (ammo.adjDps - thargoid.regenPerSecond)).toFixed(1);
+                ammo.tot75 = (exertHP / (ammo.adjDps * 0.75 - thargoid.regenPerSecond)).toFixed(1);
+                ammo.tot50 = (exertHP / (ammo.adjDps * 0.50 - thargoid.regenPerSecond)).toFixed(1);
+
+                adjustForImpossible(ammo);
             }
+
+            // To trigger a refresh, re-assign the object on the store
+            $timeOnTargetData[thargoid.name] = interceptorTotData;
         }
     };
 
+    const adjustForImpossible = (ammoData: AmmoToTData): void => {
+        for (const [key, value] of Object.entries(ammoData)) {
+            if (value >= 0) {
+                continue;
+            }
+            ammoData[key] = 'N/A';
+        }
+    }
+
     const resetCalculations = (filteredWeapons: SelectedWeapon[]): void => {
         for (const selectedWeapon of filteredWeapons) {
-            const correctWeapon = axWeaponsFind(selectedWeapon);
-            correctWeapon.nDps = 0;
-            correctWeapon.falloffFactor = 1;
+            const weapon = axWeaponsFind(selectedWeapon);
+            weapon.nDps = 0;
+            weapon.falloffFactor = 1;
         }
     };
 
     const weaponCalculations = (filteredWeapons: SelectedWeapon[]): void => {
         for (const selectedWeapon of filteredWeapons) {
-            const correctWeapon = axWeaponsFind(selectedWeapon);
-            correctWeapon.nDps += correctWeapon.sustainedAxDps;
-            if ($range <= correctWeapon.falloffRange) {
-                correctWeapon.falloffFactor = 1;
+            const weapon = axWeaponsFind(selectedWeapon);
+            weapon.nDps += weapon.sustainedAxDps;
+            if ($range <= weapon.falloffRange) {
+                weapon.falloffFactor = 1;
             }
             else {
-                correctWeapon.falloffFactor = 1 - (($range - correctWeapon.falloffRange) / (correctWeapon.maxRange - correctWeapon.falloffRange));
+                weapon.falloffFactor = 1 - (($range - weapon.falloffRange) / (weapon.maxRange - weapon.falloffRange));
             }
         }
     };
 
-    const axWeaponsFind = (selectedWeapon: SelectedWeapon) => {
+    const axWeaponsFind = (selectedWeapon: SelectedWeapon): WeaponInformation => {
         const weapon = AX_WEAPONS.find(weapon => selectedWeapon.name === weapon.shortName);
-            const correctWeapon = weapon.options.find(option => option.weaponSize === selectedWeapon.class);
-        return correctWeapon;
+        return weapon.options.find(option => option.weaponSize === selectedWeapon.class);
     };
-
 </script>
 
 <!-- The spacing needs to be worked on for sure -->
@@ -133,9 +163,6 @@
     Time on Target
 </h1>
 
-<button on:click={calculateTot}>Test</button> <!-- This button can be removed when it's dynamic -->
-
 {#each THARGOID_TYPES as interceptor}
     <InfoTable {interceptor}/>
 {/each}
-

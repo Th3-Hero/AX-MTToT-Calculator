@@ -5,10 +5,10 @@ import { AxWeapon, WeaponType } from "./dataFormat";
 //  Agreed one object would be better especially if we add weapons it will be a nightmare currently - Hero
 
 // TODO: We may also want to add more weapons in future to have all AX weapon classes
-// However that would need to be done after we rework the weapon data storeage
+//  However that would need to be done after we rework the weapon data storage
 
 // distroDraw only matters for gauss but I put it in for the others as well
-// however the other weapons fire more then 1 shot per second 
+// however the other weapons fire more then 1 shot per second
 // so it would need to be used alongside with rate of fire if we were to use draw for something else in the future
 
 export const gauss: AxWeapon = {

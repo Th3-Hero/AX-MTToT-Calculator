@@ -8,8 +8,8 @@
     $: delay = Math.round($sdpsExtraDelay) + MIN_GAUSS_DELAY_MS;
     $: bpm = Math.round(MS_PER_MINUTE / delay * 4);
 
-    let selectedAccuracy;
-    let selectedAmmo;
+    let accuracy = '100';
+    let ammo = "Basic";
 
     const distributorEngineering = () => {
         const blueprint = $selectedDistributor.blueprint;
@@ -39,14 +39,14 @@
         <input type="text" bind:value={shipName} class="text-input large-text-input p-0 has-text-centered" placeholder="Ship Name Here">
 
         <h3 class="mt-2 mb-0">Ammo Selection</h3>
-        <select id="ammoSelectionDropdown" class="dropdown-select mt-1" bind:value={selectedAmmo}>
+        <select class="dropdown-select mt-1" bind:value={ammo}>
             <option value="Basic">Basic</option>
             <option value="Standard">Standard</option>
             <option value="Premium">Premium</option>
         </select>
 
         <h3 class="mt-2 mb-0">Accuracy</h3>
-        <select id="customAccuracy" class="dropdown-select mt-1" bind:value={selectedAccuracy}>
+        <select class="dropdown-select mt-1" bind:value={accuracy}>
             <option value="100">100%</option>
             <option value="75">75%</option>
             <option value="50">50%</option>
@@ -62,14 +62,14 @@
                      distributor (${distributorEngineering()})`
                     }
                 </div>
-                <div class="has-font-20 mt-1">{selectedAmmo} ammo</div>
-                <div class="has-font-20 mt-1">{selectedAccuracy}% accuracy</div>
+                <div class="has-font-20 mt-1">{ammo} ammo</div>
+                <div class="has-font-20 mt-1">{accuracy}% accuracy</div>
                 <div class="has-font-20 mt-1">{delay}ms ({bpm} BPM)</div>
             </div>
 
             <div class="graphic mt-4 is-justify-content-center">
                 {#each THARGOID_TYPES as interceptor}
-                    <InterceptorData interceptor={interceptor.name}/>
+                    <InterceptorData bind:accuracy bind:ammo interceptor={interceptor.name}/>
                 {/each}
             </div>
         </div>

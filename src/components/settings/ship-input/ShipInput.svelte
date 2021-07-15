@@ -5,8 +5,8 @@
 </script>
 
 <h2 class="mb-1">Weapon Selection</h2>
-{#each $selectedWeapons as selectedWeapon}
-    <WeaponSelector {selectedWeapon}/>
+{#each Object.keys($selectedWeapons) as index}
+    <WeaponSelector {index}/>
 {/each}
 
 <h2 class="mb-1">Distributor Selection</h2>
