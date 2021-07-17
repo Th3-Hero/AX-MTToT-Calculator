@@ -7,9 +7,8 @@ import { AxWeapon, WeaponType } from "./dataFormat";
 // TODO: We may also want to add more weapons in future to have all AX weapon classes
 //  However that would need to be done after we rework the weapon data storage
 
-// distroDraw only matters for gauss but I put it in for the others as well
-// however the other weapons fire more then 1 shot per second
-// so it would need to be used alongside with rate of fire if we were to use draw for something else in the future
+// TODO: When we rework this we can remove some of the unused data. Only gauss uses all the data
+// not sure if interfaces can support optional values
 
 export const gauss: AxWeapon = {
     weaponName: 'Guardian Gauss Cannon',

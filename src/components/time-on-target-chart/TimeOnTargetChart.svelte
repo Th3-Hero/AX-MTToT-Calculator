@@ -1,15 +1,19 @@
 <script lang="ts">
     import { THARGOID_TYPES } from '../../typescript/data/thargoidData'
     import InterceptorData from './interceptor-data/InterceptorData.svelte';
-    import { selectedDistributor, sdpsExtraDelay } from '../../typescript/store';
-    import { MIN_GAUSS_DELAY_MS, MS_PER_MINUTE } from '../../typescript/util'
+    import { selectedDistributor, sdpsExtraDelay, selectedWeapons } from '../../typescript/store';
+    import { MIN_GAUSS_DELAY_MS, MS_PER_MINUTE, MM_IN_MS } from '../../typescript/util'
 
     let shipName = '';
     $: delay = Math.round($sdpsExtraDelay) + MIN_GAUSS_DELAY_MS;
     $: bpm = Math.round(MS_PER_MINUTE / delay * 4);
+    $: $selectedWeapons, hideDelay();
+    $: delayInMm = (delay * MM_IN_MS).toFixed(3)
 
     let accuracy = '100';
     let ammo = "Basic";
+    let haveGaussSelected = false;
+    let toggleMm = false;
 
     const distributorEngineering = () => {
         const blueprint = $selectedDistributor.blueprint;
@@ -23,13 +27,22 @@
 
         return `${blueprint.toUpperCase()} + ${effect ? effect.toUpperCase() : 'No effect'}`;
     }
+
+    const hideDelay = () => {
+        let numberOfGauss = 0;
+	    for (let weapon of Object.values($selectedWeapons)) {
+		if (weapon.name !== 'gauss') {
+			continue;
+		}
+		else {
+			numberOfGauss += 1;
+		}
+        }
+        haveGaussSelected = numberOfGauss > 0 ? true : false
+    }
+
 </script>
 
-<!--
-    At some point we need to put a button on this as when we add html2image in the future
-    we won't want it converting everytime there is an update and prompting a download.
-    Other then that this should all auto update.
--->
 
 <div class="time-on-target-chart">
     <div class="mb-3 ml-2">
@@ -52,6 +65,11 @@
             <option value="50">50%</option>
         </select>
 
+        <label class="toggle-mechs">
+            <input type=checkbox bind:checked={toggleMm}>
+            Toggle millimechs
+        </label>
+
     </div>
     <div>
         <div class="create-a-chart-container">
@@ -64,7 +82,15 @@
                 </div>
                 <div class="has-font-20 mt-1">{ammo} ammo</div>
                 <div class="has-font-20 mt-1">{accuracy}% accuracy</div>
-                <div class="has-font-20 mt-1">{delay}ms ({bpm} BPM)</div>
+                {#if haveGaussSelected}
+                    {#if toggleMm}
+                        <div class="has-font-20 mt-1">{delay}ms ({delayInMm} millimechs)</div> 
+                    {:else}
+                        <div class="has-font-20 mt-1">{delay}ms ({bpm} BPM)</div>
+                    {/if}
+                {:else}
+                    <div></div>
+                {/if}
             </div>
 
             <div class="graphic mt-4 is-justify-content-center">
@@ -76,11 +102,11 @@
     </div>
 </div>
 
-
 <style lang="scss">
     @import "src/theme";
 
     .time-on-target-chart {
+        position: relative;
         display: grid;
         grid-template-rows: 1fr 2fr;
     }
@@ -101,5 +127,11 @@
 
     .create-a-chart-container {
         border-top: 3px solid $orange;
+    }
+    
+    .toggle-mechs {
+        position: absolute;
+        right: 10px;
+        top: 205px
     }
 </style>
