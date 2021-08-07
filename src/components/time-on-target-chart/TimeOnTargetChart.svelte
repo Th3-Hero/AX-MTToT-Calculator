@@ -7,40 +7,36 @@
     let shipName = '';
     $: delay = Math.round($sdpsExtraDelay) + MIN_GAUSS_DELAY_MS;
     $: bpm = Math.round(MS_PER_MINUTE / delay * 4);
-    $: $selectedWeapons, hideDelay();
     $: delayInMm = (delay * MM_IN_MS).toFixed(3)
+    $: $selectedWeapons, hideDelay();
 
     let accuracy = '100';
     let ammo = "Basic";
     let haveGaussSelected = false;
     let toggleMm = false;
 
-    const distributorEngineering = () => {
+    const distributorEngineering = (): string => {
         const blueprint = $selectedDistributor.blueprint;
         const effect = $selectedDistributor.experimentEffect;
 
-        if ($selectedDistributor.class === 'G') {
+        if ($selectedDistributor.rating === 'G') {
             return 'Guardian';
         } else if (!blueprint) {
             return 'Not engineered';
         }
 
         return `${blueprint.toUpperCase()} + ${effect ? effect.toUpperCase() : 'No effect'}`;
-    }
+    };
 
-    const hideDelay = () => {
+    const hideDelay = (): void => {
         let numberOfGauss = 0;
 	    for (let weapon of Object.values($selectedWeapons)) {
-		if (weapon.name !== 'gauss') {
-			continue;
-		}
-		else {
-			numberOfGauss += 1;
-		}
+            if (weapon.weaponName === 'gausscannon') {
+                numberOfGauss ++;
+            }
         }
-        haveGaussSelected = numberOfGauss > 0 ? true : false
-    }
-
+        haveGaussSelected = numberOfGauss > 0
+    };
 </script>
 
 
@@ -76,7 +72,7 @@
             <div class="ml-2 mt-3">
                 <div class="has-font-20 mt-1">{shipName || "AX Ship"}</div>
                 <div class="has-font-20 mt-1">
-                    {`${$selectedDistributor.size}${$selectedDistributor.class}
+                    {`${$selectedDistributor.size}${$selectedDistributor.rating}
                      distributor (${distributorEngineering()})`
                     }
                 </div>
@@ -84,7 +80,7 @@
                 <div class="has-font-20 mt-1">{accuracy}% accuracy</div>
                 {#if haveGaussSelected}
                     {#if toggleMm}
-                        <div class="has-font-20 mt-1">{delay}ms ({delayInMm} millimechs)</div> 
+                        <div class="has-font-20 mt-1">{delay}ms ({delayInMm} millimechs)</div>
                     {:else}
                         <div class="has-font-20 mt-1">{delay}ms ({bpm} BPM)</div>
                     {/if}
@@ -128,7 +124,7 @@
     .create-a-chart-container {
         border-top: 3px solid $orange;
     }
-    
+
     .toggle-mechs {
         position: absolute;
         right: 10px;

@@ -4,7 +4,7 @@
     import { selectedWeapons } from '../../../../typescript/store';
 
     const findAxWeapon = (weaponName: string): AxWeapon | undefined => {
-        return AX_WEAPONS.find(axWeapon => axWeapon.shortName === weaponName);
+        return AX_WEAPONS.find(axWeapon => axWeapon.internalName === weaponName);
     };
 
     export let index: string;
@@ -18,24 +18,24 @@
 
 <!-- svelte-ignore a11y-no-onchange -->
 <select class="dropdown-select mt-2"
-        bind:value={selectedWeapon.name}
+        bind:value={selectedWeapon.weaponName}
         on:change={() => {
-            selectedWeapon.class = findAxWeapon(selectedWeapon.name)?.options[0].weaponSize;
+            selectedWeapon.size = findAxWeapon(selectedWeapon.weaponName)?.options[0].weaponSize;
             updateStore();
         }}>
     <option value="">No weapon</option>
     {#each AX_WEAPONS as axWeapon}
-        <option value="{axWeapon.shortName}">{axWeapon.weaponName}</option>
+        <option value="{axWeapon.internalName}">{axWeapon.fullName}</option>
     {/each}
 </select>
 
 <!-- svelte-ignore a11y-no-onchange -->
-{#if selectedWeapon.name}
+{#if selectedWeapon.weaponName}
     <select class="dropdown-select mt-2"
-            bind:value={selectedWeapon.class}
+            bind:value={selectedWeapon.size}
             on:change={() => updateStore()}>
-        {#each findAxWeapon(selectedWeapon.name).options as option}
-            <option value="{option.weaponSize}">C{option.weaponSize}</option>
+        {#each [... new Set(findAxWeapon(selectedWeapon.weaponName).options.map(option => option.weaponSize))] as option}
+            <option value="{option}">C{option}</option>
         {/each}
     </select>
 {/if}

@@ -6,8 +6,9 @@
         selectedWeapons,
         sdpsExtraDelay,
         selectedDistributor,
-        timeOnTargetData, setEmptyTotStore
-    } from "../../typescript/store";
+        timeOnTargetData,
+        setEmptyTotStore
+    } from '../../typescript/store';
     import { gauss, AX_WEAPONS } from '../../typescript/data/weaponData'
     import {
         distributorRecharge,
@@ -23,11 +24,11 @@
         AmmoToTData,
         DistributorModifier,
         SelectedWeapon,
-        WeaponInformation
+        WeaponOption
     } from '../../typescript/data/dataFormat';
 
     const fireCalculation = (): void => {
-        const filteredWeapons: SelectedWeapon[] = Object.values($selectedWeapons).filter(selectedWeapon => selectedWeapon.name);
+        const filteredWeapons: SelectedWeapon[] = Object.values($selectedWeapons).filter(selectedWeapon => selectedWeapon.weaponName);
         if (filteredWeapons.length === 0) {
             $timeOnTargetData = setEmptyTotStore();
             return;
@@ -44,13 +45,13 @@
 
     const calculateSdps = (weapons: SelectedWeapon[]): void => {
         let totalDraw = 0;
-        weapons.filter(selectedWeapon => selectedWeapon.name === 'gauss')
+        weapons.filter(selectedWeapon => selectedWeapon.weaponName === 'gausscannon')
                .forEach(selectedWeapon => {
-                   const weapon = gauss.options.find(option => option.weaponSize === selectedWeapon.class);
+                   const weapon = gauss.options.find(option => option.weaponSize === selectedWeapon.size);
                    totalDraw += weapon.distroDraw
                });
 
-        const distributor = `${ $selectedDistributor.size }${ $selectedDistributor.class }`;
+        const distributor = `${ $selectedDistributor.size }${ $selectedDistributor.rating }`;
         let weaponRecharge = distributorRecharge[distributor];
         weaponRecharge = applyModifier(weaponRecharge, distributorBlueprints, $selectedDistributor.blueprint);
         if ($selectedDistributor.blueprint) {
@@ -79,7 +80,7 @@
     };
 
     const calculateTot = (): void => {
-        const filteredWeapons: SelectedWeapon[] = Object.values($selectedWeapons).filter(selectedWeapon => selectedWeapon.name);
+        const filteredWeapons: SelectedWeapon[] = Object.values($selectedWeapons).filter(selectedWeapon => selectedWeapon.weaponName);
 
         calculateSdps(filteredWeapons);
         resetCalculations(filteredWeapons);
@@ -92,7 +93,7 @@
             let adjDpsStandard = 0;
             let adjDpsPremium = 0;
             const uniqueWeapons = filteredWeapons.filter((weapon, index) =>
-                filteredWeapons.findIndex(selectedWeapon => selectedWeapon.name === weapon.name && selectedWeapon.class === weapon.class) === index);
+                filteredWeapons.findIndex(selectedWeapon => selectedWeapon.weaponName === weapon.weaponName && selectedWeapon.size === weapon.size) === index);
             for (const selectedWeapon of uniqueWeapons) {
                 const weaponOption = axWeaponsFind(selectedWeapon);
                 const adjDps = weaponOption.nDps * (weaponOption.armourPierce / thargoid.armourRating) * weaponOption.falloffFactor;
@@ -150,9 +151,9 @@
         }
     };
 
-    const axWeaponsFind = (selectedWeapon: SelectedWeapon): WeaponInformation => {
-        const weapon = AX_WEAPONS.find(weapon => selectedWeapon.name === weapon.shortName);
-        return weapon.options.find(option => option.weaponSize === selectedWeapon.class);
+    const axWeaponsFind = (selectedWeapon: SelectedWeapon): WeaponOption => {
+        const weapon = AX_WEAPONS.find(weapon => selectedWeapon.weaponName === weapon.internalName);
+        return weapon.options.find(option => option.weaponSize === selectedWeapon.size);
     };
 </script>
 

@@ -1,13 +1,18 @@
 import { writable } from 'svelte/store';
-import { SelectedDistributor, SelectedWeapons, TimeOnTargetData } from './data/dataFormat';
+import {
+    SelectedDistributor,
+    SelectedWeapons,
+    TimeOnTargetData,
+    WeaponType
+} from './data/dataFormat';
 import { THARGOID_TYPES } from './data/thargoidData';
 import { MAX_AX_WEAPONS } from './util';
 
-const buildStarterWeaponStore = (): SelectedWeapons => {
+export const buildStarterWeaponStore = (): SelectedWeapons => {
     const weapons: SelectedWeapons = {}
 
     for (let i = 0; i < MAX_AX_WEAPONS; i++) {
-        weapons[i] = { name: '', class: undefined };
+        weapons[i] = { weaponName: '', size: undefined, weaponType: WeaponType.FIXED };
     }
     return weapons;
 };
@@ -30,7 +35,7 @@ export const setEmptyTotStore = (): TimeOnTargetData => {
 export const selectedWeapons = writable<SelectedWeapons>(buildStarterWeaponStore());
 export const range = writable<number>(1500);
 export const selectedDistributor = writable<SelectedDistributor>(
-    { size: 1, class: 'A', blueprint: '', experimentEffect: '' });
+    { size: 1, rating: 'A', blueprint: undefined, experimentEffect: undefined });
 export const heatsinks = writable<number>(0);
 
 // Calculation stores

@@ -17,23 +17,22 @@
             $range = 1500;
         }
     }
-
 </script>
 
 <div class="is-flex is-flex-direction-column">
     <h1 class="mb-0 mt-1 has-text-centered">Settings</h1>
     <div class="ml-2">
-        {#if !isImport}
-            <ShipInput/>
+        {#if isImport}
+            <ShipImport bind:isImport/>
         {:else}
-            <ShipImport/>
+            <ShipInput/>
+
+            <h2 class="mb-1">Active Heatsinks</h2>
+            <input type="text" bind:value={$heatsinks} on:change={inputCheck} class="text-input small-text-input has-text-centered p-0" placeholder="0">
+
+            <h2 class="mb-1">Target Range</h2>
+            <input type="text" bind:value={$range} on:change={inputCheck} class="text-input small-text-input has-text-centered p-0" placeholder="1500">
         {/if}
-
-        <h2 class="mb-1">Active Heatsinks</h2>
-        <input type="text" bind:value={$heatsinks} on:change={inputCheck} class="text-input small-text-input has-text-centered p-0" placeholder="0">
-
-        <h2 class="mb-1">Target Range</h2>
-        <input type="text" bind:value={$range} on:change={inputCheck} id="range" class="text-input small-text-input has-text-centered p-0" placeholder="1500">
     </div>
 </div>
 

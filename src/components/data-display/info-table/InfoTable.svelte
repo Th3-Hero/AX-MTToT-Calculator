@@ -18,7 +18,7 @@
     </thead>
     <tbody>
         <tr>
-            <th class="">100% Accuracy</th>
+            <th>100% Accuracy</th>
             <td class="has-text-centered" id="100Basic">{totData.basicAmmo.tot100}</td>
             <td class="has-text-centered" id="100Std">{totData.standardAmmo.tot100}</td>
             <td class="has-text-centered" id="100Prem">{totData.premiumAmmo.tot100}</td>

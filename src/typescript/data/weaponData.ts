@@ -1,21 +1,11 @@
-import { AxWeapon, WeaponType } from "./dataFormat";
-
-// TODO: There is no great representation of fixed vs turret right now.
-//  Having to maintain multiple objects is not ideal, but it will work for a short time.
-//  Agreed one object would be better especially if we add weapons it will be a nightmare currently - Hero
-
-// TODO: We may also want to add more weapons in future to have all AX weapon classes
-//  However that would need to be done after we rework the weapon data storage
-
-// TODO: When we rework this we can remove some of the unused data. Only gauss uses all the data
-// not sure if interfaces can support optional values
+import { AxWeapon, WeaponType } from './dataFormat';
 
 export const gauss: AxWeapon = {
-    weaponName: 'Guardian Gauss Cannon',
-    shortName: 'gauss',
-    weaponType: WeaponType.FIXED,
+    fullName: 'Guardian Gauss Cannon',
+    internalName: 'gausscannon',
     options: [
         {
+            mount: WeaponType.FIXED,
             weaponSize: 1,
             clipSize: 80,
             rof: 0.487804878,
@@ -34,6 +24,7 @@ export const gauss: AxWeapon = {
             premAmmoPercent: 1.30
         },
         {
+            mount: WeaponType.FIXED,
             weaponSize: 2,
             clipSize: 80,
             rof: 0.487804878,
@@ -55,11 +46,11 @@ export const gauss: AxWeapon = {
 };
 
 const plasma: AxWeapon = {
-    weaponName: 'Guardian Plasma Charger',
-    shortName: 'plasma',
-    weaponType: WeaponType.FIXED,
+    fullName: 'Guardian Plasma Charger',
+    internalName: 'plasmalauncher',
     options: [
         {
+            mount: WeaponType.FIXED,
             weaponSize: 1,
             clipSize: 15,
             rof: 0.5,
@@ -78,6 +69,7 @@ const plasma: AxWeapon = {
             premAmmoPercent: 1.30
         },
         {
+            mount: WeaponType.FIXED,
             weaponSize: 3,
             clipSize: 15,
             rof: 0.5555555556,
@@ -99,11 +91,11 @@ const plasma: AxWeapon = {
 };
 
 const shard: AxWeapon = {
-    weaponName: 'Guardian Shard Cannon',
-    shortName: 'shard',
-    weaponType: WeaponType.FIXED,
+    fullName: 'Guardian Shard Cannon',
+    internalName: 'shardcannon',
     options: [
         {
+            mount: WeaponType.FIXED,
             weaponSize: 1,
             clipSize: 5,
             rof: 1.667,
@@ -122,6 +114,7 @@ const shard: AxWeapon = {
             premAmmoPercent: 1.30
         },
         {
+            mount: WeaponType.FIXED,
             weaponSize: 2,
             clipSize: 5,
             rof: 1.667,
@@ -140,6 +133,7 @@ const shard: AxWeapon = {
             premAmmoPercent: 1.30
         },
         {
+            mount: WeaponType.FIXED,
             weaponSize: 3,
             clipSize: 5,
             rof: 1.667,
@@ -161,11 +155,11 @@ const shard: AxWeapon = {
 }
 
 const axmc: AxWeapon = {
-    weaponName: 'Anti-Xeno Multi Cannon',
-    shortName: 'axmc',
-    weaponType: WeaponType.FIXED,
+    fullName: 'AX Multi-cannon',
+    internalName: 'atmulticannon',
     options: [
         {
+            mount: WeaponType.FIXED,
             weaponSize: 2,
             clipSize: 100,
             rof: 7.14,
@@ -184,6 +178,7 @@ const axmc: AxWeapon = {
             premAmmoPercent: 1.10
         },
         {
+            mount: WeaponType.FIXED,
             weaponSize: 3,
             clipSize: 100,
             rof: 5.88,
@@ -200,16 +195,9 @@ const axmc: AxWeapon = {
             maxRange: 4000,
             stdAmmoPercent: 1.05,
             premAmmoPercent: 1.10
-        }
-    ]
-};
-
-const axmct: AxWeapon = {
-    weaponName: 'Anti-Xeno Multi Cannon (Turret)',
-    shortName: 'axmct',
-    weaponType: WeaponType.TURRETED,
-    options: [
+        },
         {
+            mount: WeaponType.TURRET,
             weaponSize: 3,
             clipSize: 90,
             rof: 6.25,
@@ -231,11 +219,11 @@ const axmct: AxWeapon = {
 };
 
 const axmr: AxWeapon = {
-    weaponName: 'Anti-Xeno Missile Rack',
-    shortName: 'axmr',
-    weaponType: WeaponType.DUMB_FIRE,
+    fullName: 'AX Missile Rack',
+    internalName: 'atdumbfiremissile',
     options: [
         {
+            mount: WeaponType.FIXED,
             weaponSize: 2,
             clipSize: 8,
             rof: 0.50,
@@ -254,6 +242,7 @@ const axmr: AxWeapon = {
             premAmmoPercent: 1.10
         },
         {
+            mount: WeaponType.FIXED,
             weaponSize: 3,
             clipSize: 12,
             rof: 0.50,
@@ -274,7 +263,6 @@ const axmr: AxWeapon = {
     ]
 };
 
-
 export const AX_WEAPONS = [
-    gauss, plasma, shard, axmc, axmct, axmr
+    gauss, plasma, shard, axmc, axmr
 ];
