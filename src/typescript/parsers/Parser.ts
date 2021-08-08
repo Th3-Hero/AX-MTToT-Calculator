@@ -1,7 +1,7 @@
 import { SelectedDistributor, SelectedWeapons } from '../data/dataFormat';
 
 export abstract class Parser {
-    protected constructor(
+    public constructor(
         protected readonly _shipBuild: ImportFormat,
     ) {
     }
@@ -11,6 +11,6 @@ export abstract class Parser {
     abstract parseWeapons(): SelectedWeapons;
 }
 
-export interface ImportFormat{
+export interface ImportFormat {
     [name: string]: any;
 }

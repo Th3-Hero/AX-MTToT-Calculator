@@ -13,17 +13,15 @@ export interface WeaponOption {
     rof: number;
     reloadTime: number;
     distroDraw: number;
-    damage: number;
-    axPercent: number;
     axDamage: number;
     sustainedAxDps: number;
-    nDps: number;
     armourPierce: number;
     falloffRange: number;
-    falloffFactor: number;
     maxRange: number;
     stdAmmoPercent: number;
     premAmmoPercent: number;
+    nDps: number;
+    falloffFactor: number;
 }
 
 export interface AxWeapon {

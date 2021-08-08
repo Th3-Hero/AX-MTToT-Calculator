@@ -6,7 +6,9 @@
     import { InaraParser } from '../../../typescript/parsers/InaraParser';
 
     let userInput = '';
-    export let isImport: boolean;
+    export let newTab: string;
+
+    let errorInfo = '';
 
     const parseInput = (): void => {
         let inputAsJson: object;
@@ -17,6 +19,8 @@
             }
         } catch (e) {
             // An error here means it isn't even parseable
+            // not json or object
+            errorInfo = 'Input could NOT be read.';
             return;
         }
 
@@ -31,6 +35,8 @@
             parser = new CoriolisParser(inputAsJson);
         } else {
             // Making it here means the input is parseable but not a recognized format
+            // json & object/array but not supported format
+            errorInfo = 'Input is NOT a supported format.';
             return;
         }
 
@@ -43,29 +49,34 @@
             $selectedWeapons = parsedWeapons;
         }
 
-        isImport = false;
+        newTab = 'settings';
     };
 </script>
 
 <div class="mr-2 is-flex is-flex-direction-column is-align-items-center">
-    <p class="mb has-text-centered">Import an existing build using JSON from EDSY and Coriolis</p>
+    <p class="mt-0 has-text-centered">Import an existing build using JSON from EDSY, Inara and Coriolis</p>
     <textarea bind:value={userInput} class="textarea is-paddingless import-box has-fixed-size"></textarea>
-    <p class="is-size-7">Importing will overwrite previous module input</p>
-    <button class="button mt-5 import-button" on:click={() => parseInput()}>Import</button>
-</div>
+    <p class="is-size-7">Importing will overwrite previous module selection!</p>
+    <button class="mt-3 import-button" on:click={() => parseInput()}>Import</button>
+    {#if errorInfo !== ''}
+        <span class="material-icons mt-5">error</span>
+        <div class="mt-2">{errorInfo}</div>
+    {:else}
+        <div></div>
+    {/if}
 
+</div>
 
 <style lang="scss">
     @import "src/theme";
     .import-box {
         width: 300px;
-        height: 400px;
+        height: 350px;
         background: $input;
         border: none;
-        border-bottom: 1px solid $orange;
 
         -ms-overflow-style: none;
-         scrollbar-width: none;
+        scrollbar-width: none;
     }
 
     .import-box::-webkit-scrollbar {
@@ -73,6 +84,18 @@
     }
 
     .import-button {
-      font-weight: bold;
+        width: 100px;
+        height: 35px;
+        color: $font;
+        background: $background;
+        border: 2px solid $orange;
+        border-radius: 5px;
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .import-button:hover {
+        cursor: pointer;
+        background: $background-light;
     }
 </style>

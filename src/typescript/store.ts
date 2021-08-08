@@ -41,3 +41,6 @@ export const heatsinks = writable<number>(0);
 // Calculation stores
 export const sdpsExtraDelay = writable<number>(0);
 export const timeOnTargetData = writable<TimeOnTargetData>(setEmptyTotStore());
+
+// Other Stores
+export const advancedTheory = writable<boolean>(false);

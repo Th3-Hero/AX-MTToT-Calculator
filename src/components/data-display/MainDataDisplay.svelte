@@ -6,9 +6,10 @@
         selectedWeapons,
         sdpsExtraDelay,
         selectedDistributor,
-        timeOnTargetData,
-        setEmptyTotStore
-    } from '../../typescript/store';
+        timeOnTargetData, 
+        setEmptyTotStore,
+        advancedTheory
+    } from "../../typescript/store";
     import { gauss, AX_WEAPONS } from '../../typescript/data/weaponData'
     import {
         distributorRecharge,
@@ -35,13 +36,16 @@
         }
 
         calculateTot();
-    }
+    };
 
     // Shorthand for subscribing to these stores. On change, they fire the method
     $: $selectedWeapons, fireCalculation();
     $: $selectedDistributor, fireCalculation();
     $: $range, fireCalculation();
     $: $heatsinks, fireCalculation();
+    $: $advancedTheory, fireCalculation();
+
+    let toggleAdvancedTheroy = false;
 
     const calculateSdps = (weapons: SelectedWeapon[]): void => {
         let totalDraw = 0;
@@ -93,7 +97,9 @@
             let adjDpsStandard = 0;
             let adjDpsPremium = 0;
             const uniqueWeapons = filteredWeapons.filter((weapon, index) =>
-                filteredWeapons.findIndex(selectedWeapon => selectedWeapon.weaponName === weapon.weaponName && selectedWeapon.size === weapon.size) === index);
+                filteredWeapons.findIndex(selectedWeapon => selectedWeapon.weaponName === weapon.weaponName && 
+                                                            selectedWeapon.size === weapon.size &&
+                                                            selectedWeapon.weaponType === weapon.weaponType) === index);
             for (const selectedWeapon of uniqueWeapons) {
                 const weaponOption = axWeaponsFind(selectedWeapon);
                 const adjDps = weaponOption.nDps * (weaponOption.armourPierce / thargoid.armourRating) * weaponOption.falloffFactor;
@@ -124,11 +130,14 @@
     const adjustForImpossible = (ammoData: AmmoToTData): void => {
         for (const [key, value] of Object.entries(ammoData)) {
             if (value >= 0) {
+                if (value > 300 && !$advancedTheory) {
+                    ammoData[key] = '>300';
+                }
                 continue;
             }
             ammoData[key] = 'N/A';
         }
-    }
+    };
 
     const resetCalculations = (filteredWeapons: SelectedWeapon[]): void => {
         for (const selectedWeapon of filteredWeapons) {
@@ -153,16 +162,26 @@
 
     const axWeaponsFind = (selectedWeapon: SelectedWeapon): WeaponOption => {
         const weapon = AX_WEAPONS.find(weapon => selectedWeapon.weaponName === weapon.internalName);
-        return weapon.options.find(option => option.weaponSize === selectedWeapon.size);
+
+        return weapon.options.find(option => option.weaponSize === selectedWeapon.size && 
+                              option.mount === selectedWeapon.weaponType);
+    };
+
+    const toggleAdvancedMode = ():void => {
+        $advancedTheory = toggleAdvancedTheroy
     };
 </script>
 
-<!-- The spacing needs to be worked on for sure -->
 
 <h1 class="title has-text-centered mt-1">
     Minimum Theoretical <br>
     Time on Target
 </h1>
+
+<label class="toggle-advanced">
+    <input type=checkbox bind:checked={toggleAdvancedTheroy} on:change={toggleAdvancedMode}>
+    Toggle Advanced Theroy
+</label>
 
 {#each THARGOID_TYPES as interceptor}
     <InfoTable {interceptor}/>

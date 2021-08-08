@@ -45,7 +45,7 @@
         <h1 class="mt-1 mb-0 has-text-centered">Create a Chart</h1>
 
         <h3 class="mt-2 mb-0">Name your ship!</h3>
-        <input type="text" bind:value={shipName} class="text-input large-text-input p-0 has-text-centered" placeholder="Ship Name Here">
+        <input type="text" bind:value={shipName} maxlength="26" class="text-input large-text-input p-0 has-text-centered" placeholder="Ship Name Here">
 
         <h3 class="mt-2 mb-0">Ammo Selection</h3>
         <select class="dropdown-select mt-1" bind:value={ammo}>
@@ -63,7 +63,7 @@
 
         <label class="toggle-mechs">
             <input type=checkbox bind:checked={toggleMm}>
-            Toggle millimechs
+            Toggle Millimechs
         </label>
 
     </div>
@@ -80,7 +80,7 @@
                 <div class="has-font-20 mt-1">{accuracy}% accuracy</div>
                 {#if haveGaussSelected}
                     {#if toggleMm}
-                        <div class="has-font-20 mt-1">{delay}ms ({delayInMm} millimechs)</div>
+                        <div class="has-font-20 mt-1">{delay}ms ({delayInMm} Millimechs)</div> 
                     {:else}
                         <div class="has-font-20 mt-1">{delay}ms ({bpm} BPM)</div>
                     {/if}
