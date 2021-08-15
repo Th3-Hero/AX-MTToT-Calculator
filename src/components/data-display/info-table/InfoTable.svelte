@@ -19,21 +19,21 @@
     <tbody>
         <tr>
             <th>100% Accuracy</th>
-            <td class="has-text-centered table-colum">{totData.basicAmmo.tot100}</td>
-            <td class="has-text-centered table-colum">{totData.standardAmmo.tot100}</td>
-            <td class="has-text-centered table-colum">{totData.premiumAmmo.tot100}</td>
+            <td class="has-text-centered table-column">{totData.basicAmmo.tot100}</td>
+            <td class="has-text-centered table-column">{totData.standardAmmo.tot100}</td>
+            <td class="has-text-centered table-column">{totData.premiumAmmo.tot100}</td>
         </tr>
         <tr>
             <th>75% Accuracy</th>
-            <td class="has-text-centered table-colum">{totData.basicAmmo.tot75}</td>
-            <td class="has-text-centered table-colum">{totData.standardAmmo.tot75}</td>
-            <td class="has-text-centered table-colum">{totData.premiumAmmo.tot75}</td>
+            <td class="has-text-centered table-column">{totData.basicAmmo.tot75}</td>
+            <td class="has-text-centered table-column">{totData.standardAmmo.tot75}</td>
+            <td class="has-text-centered table-column">{totData.premiumAmmo.tot75}</td>
         </tr>
         <tr>
             <th class="table-header-end">50% Accuracy</th>
-            <td class="has-text-centered table-colum">{totData.basicAmmo.tot50}</td>
-            <td class="has-text-centered table-colum">{totData.standardAmmo.tot50}</td>
-            <td class="has-text-centered table-colum">{totData.premiumAmmo.tot50}</td>
+            <td class="has-text-centered table-column">{totData.basicAmmo.tot50}</td>
+            <td class="has-text-centered table-column">{totData.standardAmmo.tot50}</td>
+            <td class="has-text-centered table-column">{totData.premiumAmmo.tot50}</td>
         </tr>
     </tbody>
 </table>
@@ -44,7 +44,7 @@
         border-collapse: collapse;
     }
 
-    .table-colum {
+    .table-column {
         width: 60px;
     }
 </style>

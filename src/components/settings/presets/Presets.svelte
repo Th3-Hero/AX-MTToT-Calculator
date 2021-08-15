@@ -1,11 +1,20 @@
 <script lang="ts">
     import { presets } from './ShipPresets';
     import { selectedWeapons, selectedDistributor, heatsinks } from '../../../typescript/store';
+    import type { SelectedWeapons } from '../../../typescript/data/dataFormat';
+
+    const deepCloneWeapons = (presetWeapons: SelectedWeapons): SelectedWeapons => {
+        const clonedWeapons: SelectedWeapons = {};
+        for (const weaponNumber of Object.keys(presetWeapons)) {
+            clonedWeapons[weaponNumber] = { ... presetWeapons[weaponNumber] };
+        }
+        return clonedWeapons;
+    };
 
     const selectPreset = (option: string): void => {
         const preset = presets.get(option);
-        $selectedWeapons = preset.weapons;
-        $selectedDistributor = preset.distributor;
+        $selectedWeapons = deepCloneWeapons(preset.weapons);
+        $selectedDistributor = { ... preset.distributor };
         $heatsinks = preset.heatsinks;
     };
 </script>

@@ -1,5 +1,9 @@
 import { SelectedDistributor, SelectedWeapons, WeaponType } from '../../../typescript/data/dataFormat';
 
+// The below import is unused be necessary due to a Svelte issue with enums, described here:
+// https://www.reddit.com/r/sveltejs/comments/n87r2n/getting_a_typescript_enum_in_a_standalone_file_to/
+import { SettingsTabs } from '../SettingTabs';
+
 const empty: ShipPreset = {
     weapons: {
         0: { weaponName: '', size: undefined, weaponType: WeaponType.FIXED },

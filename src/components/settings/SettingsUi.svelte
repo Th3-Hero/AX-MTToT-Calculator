@@ -3,9 +3,10 @@
     import ShipImport from './ship-import/ShipImport.svelte';
     import { range, heatsinks } from '../../typescript/store';
     import Presets from './presets/Presets.svelte';
+    import { SettingsTabs } from './SettingTabs';
 
-    let selectedTab = 'settings';
-    let newTab = 'settings';
+    let selectedTab = SettingsTabs.SETTINGS;
+    let newTab = SettingsTabs.SETTINGS;
 
     const selectTab = (): void => {
         if (newTab === selectedTab) {
@@ -24,24 +25,24 @@
         let rangeInput = Number($range);
         if (!Number.isInteger(heatsinkInput) || heatsinkInput < 0 || heatsinkInput > 8) {
             $heatsinks = 0;
-        };
+        }
         // 6k may need to be changed if we add new shard cannon
         if (!Number.isInteger(rangeInput) || rangeInput < 0 || rangeInput > 6000) {
             $range = 1500;
-        };
+        }
     };
 </script>
 
 <div class="is-flex is-flex-direction-column">
     <div class="tabs mb-3 is-boxed is-centered">
         <ul class="p-0">
-            <li id="settingsTab" class="tab is-active" on:click={() => newTab = 'settings'}>
+            <li id="settingsTab" class="tab is-active" on:click={() => newTab = SettingsTabs.SETTINGS}>
                 <a><span>Settings</span></a>
             </li>
-            <li id="importerTab" class="tab" on:click={() => newTab = 'importer'}>
+            <li id="importerTab" class="tab" on:click={() => newTab = SettingsTabs.IMPORTER}>
                 <a><span>Importer</span></a>
             </li>
-            <li id="presetsTab" class="tab" on:click={() => newTab = 'presets'}>
+            <li id="presetsTab" class="tab" on:click={() => newTab = SettingsTabs.PRESETS}>
                 <a><span>Presets</span></a>
             </li>
         </ul>
@@ -62,7 +63,7 @@
             <h2 class="mb-1">Target Range</h2>
             <input type="text" bind:value={$range} on:change={inputCheck} class="text-input small-text-input has-text-centered p-0" placeholder="1500">
             {/if}
-    </div>   
+    </div>
 </div>
 
 <style lang="scss">
@@ -80,5 +81,4 @@
         color: $font;
         background: $background-light;
     }
-
 </style>

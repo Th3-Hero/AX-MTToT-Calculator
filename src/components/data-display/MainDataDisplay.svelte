@@ -6,10 +6,9 @@
         selectedWeapons,
         sdpsExtraDelay,
         selectedDistributor,
-        timeOnTargetData, 
+        timeOnTargetData,
         setEmptyTotStore,
-        advancedTheory
-    } from "../../typescript/store";
+    } from '../../typescript/store';
     import { gauss, AX_WEAPONS } from '../../typescript/data/weaponData'
     import {
         distributorRecharge,
@@ -43,9 +42,8 @@
     $: $selectedDistributor, fireCalculation();
     $: $range, fireCalculation();
     $: $heatsinks, fireCalculation();
-    $: $advancedTheory, fireCalculation();
 
-    let toggleAdvancedTheroy = false;
+    let advancedTheory = false;
 
     const calculateSdps = (weapons: SelectedWeapon[]): void => {
         let totalDraw = 0;
@@ -97,7 +95,7 @@
             let adjDpsStandard = 0;
             let adjDpsPremium = 0;
             const uniqueWeapons = filteredWeapons.filter((weapon, index) =>
-                filteredWeapons.findIndex(selectedWeapon => selectedWeapon.weaponName === weapon.weaponName && 
+                filteredWeapons.findIndex(selectedWeapon => selectedWeapon.weaponName === weapon.weaponName &&
                                                             selectedWeapon.size === weapon.size &&
                                                             selectedWeapon.weaponType === weapon.weaponType) === index);
             for (const selectedWeapon of uniqueWeapons) {
@@ -130,7 +128,7 @@
     const adjustForImpossible = (ammoData: AmmoToTData): void => {
         for (const [key, value] of Object.entries(ammoData)) {
             if (value >= 0) {
-                if (value > 300 && !$advancedTheory) {
+                if (value > 300 && !advancedTheory) {
                     ammoData[key] = '>300';
                 }
                 continue;
@@ -163,12 +161,8 @@
     const axWeaponsFind = (selectedWeapon: SelectedWeapon): WeaponOption => {
         const weapon = AX_WEAPONS.find(weapon => selectedWeapon.weaponName === weapon.internalName);
 
-        return weapon.options.find(option => option.weaponSize === selectedWeapon.size && 
+        return weapon.options.find(option => option.weaponSize === selectedWeapon.size &&
                               option.mount === selectedWeapon.weaponType);
-    };
-
-    const toggleAdvancedMode = ():void => {
-        $advancedTheory = toggleAdvancedTheroy
     };
 </script>
 
@@ -179,8 +173,8 @@
 </h1>
 
 <label class="toggle-advanced">
-    <input type=checkbox bind:checked={toggleAdvancedTheroy} on:change={toggleAdvancedMode}>
-    Toggle Advanced Theroy
+    <input type=checkbox bind:checked={advancedTheory} on:change={fireCalculation}>
+    Show full times
 </label>
 
 {#each THARGOID_TYPES as interceptor}

@@ -4,6 +4,7 @@
     import { Parser } from '../../../typescript/parsers/Parser';
     import { selectedDistributor, selectedWeapons } from '../../../typescript/store';
     import { InaraParser } from '../../../typescript/parsers/InaraParser';
+    import { SettingsTabs } from '../SettingTabs';
 
     let userInput = '';
     export let newTab: string;
@@ -18,9 +19,7 @@
                 return;
             }
         } catch (e) {
-            // An error here means it isn't even parseable
-            // not json or object
-            errorInfo = 'Input could NOT be read.';
+            errorInfo = 'Input could not be read.';
             return;
         }
 
@@ -34,9 +33,7 @@
         } else if (inputAsJson['$schema']?.includes('coriolis.io')) {
             parser = new CoriolisParser(inputAsJson);
         } else {
-            // Making it here means the input is parseable but not a recognized format
-            // json & object/array but not supported format
-            errorInfo = 'Input is NOT a supported format.';
+            errorInfo = 'Input is not a supported format.';
             return;
         }
 
@@ -49,7 +46,7 @@
             $selectedWeapons = parsedWeapons;
         }
 
-        newTab = 'settings';
+        newTab = SettingsTabs.SETTINGS;
     };
 </script>
 
