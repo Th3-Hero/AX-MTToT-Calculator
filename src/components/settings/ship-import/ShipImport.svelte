@@ -37,14 +37,8 @@
             return;
         }
 
-        const parsedDistributor = parser.parseDistributor();
-        if (parsedDistributor !== null) {
-            $selectedDistributor = parsedDistributor;
-        }
-        const parsedWeapons = parser.parseWeapons();
-        if (parsedWeapons != null) {
-            $selectedWeapons = parsedWeapons;
-        }
+        $selectedDistributor = parser.parseDistributor();
+        $selectedWeapons = parser.parseWeapons();
 
         newTab = SettingsTabs.SETTINGS;
     };

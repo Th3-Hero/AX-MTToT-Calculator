@@ -1,11 +1,12 @@
 <script lang="ts">
     import { presets } from './ShipPresets';
-    import { 
-        selectedWeapons, 
-        selectedDistributor, 
+    import {
+        selectedWeapons,
+        selectedDistributor,
         heatsinks,
-        buildEmptyWeaponStore,
-        buildEmptyDistributorStore } from '../../../typescript/store';
+        emptyWeaponStore,
+        emptyDistributorStore
+    } from '../../../typescript/store';
     import type { SelectedWeapons } from '../../../typescript/data/dataFormat';
 
     const deepCloneWeapons = (presetWeapons: SelectedWeapons): SelectedWeapons => {
@@ -24,8 +25,8 @@
     };
 
     const emptyStores = (): void => {
-        $selectedWeapons = buildEmptyWeaponStore();
-        $selectedDistributor = buildEmptyDistributorStore();
+        $selectedWeapons = emptyWeaponStore();
+        $selectedDistributor = emptyDistributorStore();
         $heatsinks = 0;
     };
 </script>

@@ -7,7 +7,7 @@ import {
     distributorSizes
 } from '../data/distributorData';
 import { MAX_AX_WEAPONS } from '../util';
-import { buildEmptyWeaponStore } from '../store';
+import { emptyDistributorStore, emptyWeaponStore } from '../store';
 import { AX_WEAPONS } from '../data/weaponData';
 
 export class EdsyParser extends Parser {
@@ -16,14 +16,16 @@ export class EdsyParser extends Parser {
     }
 
     parseDistributor(): SelectedDistributor {
+        const selectedDistributor = emptyDistributorStore();
+
         const distributor: EdsyDistributor = this._shipBuild.data?.Modules?.find(module => module.Slot.toLowerCase() === 'powerdistributor');
         if (distributor == null) {
-            return null;
+            return selectedDistributor;
         }
 
         const distributorData = distributor.Item.split('_');
         if (distributorData.length !== 3 && distributorData.length !== 4) {
-            return null;
+            return selectedDistributor;
         }
 
         let rating: string;
@@ -35,44 +37,41 @@ export class EdsyParser extends Parser {
 
         const size = Number(distributorData[2].match(/\d/)[0]);
         if (!distributorSizes.includes(size) || !distributorRatings.includes(rating)) {
-            return null;
+            return selectedDistributor;
         }
+
+        selectedDistributor.size = size;
+        selectedDistributor.rating = rating;
 
         const distributorEngineering = distributor.Engineering;
-        let blueprint: string = undefined;
-        let experimentEffect: string = undefined;
         if (distributorEngineering) {
-            blueprint = distributorBlueprints.find(modifier =>
+            selectedDistributor.blueprint = distributorBlueprints.find(modifier =>
                 modifier.internalName === distributorEngineering.BlueprintName.toLowerCase())?.shortName;
+
             if (distributorEngineering.ExperimentalEffect) {
-                experimentEffect = distributorExperimentEffects.find(modifier =>
+                selectedDistributor.experimentEffect = distributorExperimentEffects.find(modifier =>
                     modifier.internalName === distributorEngineering.ExperimentalEffect.toLowerCase())?.shortName;
             }
-
         }
 
-        return {
-            size,
-            rating,
-            blueprint,
-            experimentEffect
-        };
+        return selectedDistributor;
     }
 
     parseWeapons(): SelectedWeapons {
+        const selectedWeapons = emptyWeaponStore();
+
         const hardpoints: EdsyHardpoint[] = this._shipBuild.data?.Modules?.filter(module => module.Slot.toLowerCase().includes('hardpoint'));
         if (hardpoints.length === 0) {
-            return null;
-        }
+            return selectedWeapons;
 
+        }
         const importedAxWeapons = hardpoints.filter(hardpoint => hardpoint.Item?.startsWith('hpt_guardian') ||
                                                                  hardpoint.Item?.startsWith('hpt_at'))
                                             .slice(0, MAX_AX_WEAPONS);
         if (importedAxWeapons.length === 0) {
-            return null;
+            return selectedWeapons;
         }
 
-        const selectedWeapons = buildEmptyWeaponStore();
         for (let i = 0; i < importedAxWeapons.length; i++) {
             const parsedName = importedAxWeapons[i].Item;
             if (!parsedName) {

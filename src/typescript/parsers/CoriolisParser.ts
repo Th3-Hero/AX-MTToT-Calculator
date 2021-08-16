@@ -7,7 +7,7 @@ import {
     distributorSizes
 } from '../data/distributorData';
 import { MAX_AX_WEAPONS } from '../util';
-import { buildEmptyWeaponStore } from '../store';
+import { emptyDistributorStore, emptyWeaponStore } from '../store';
 import { AX_WEAPONS } from '../data/weaponData';
 
 export class CoriolisParser extends Parser {
@@ -16,9 +16,11 @@ export class CoriolisParser extends Parser {
     }
 
     parseDistributor(): SelectedDistributor {
+        const selectedDistributor = emptyDistributorStore();
+
         const distributor: CoriolisDistributor = this._shipBuild.components?.standard?.powerDistributor;
         if (!distributor) {
-            return null;
+            return selectedDistributor;
         }
 
         let rating: string;
@@ -30,34 +32,32 @@ export class CoriolisParser extends Parser {
 
         const size = distributor.class;
         if (!distributorSizes.includes(size) || !distributorRatings.includes(rating)) {
-            return null;
+            return selectedDistributor;
         }
 
+        selectedDistributor.size = size;
+        selectedDistributor.rating = rating;
+
         const distributorBlueprint = distributor.blueprint;
-        let blueprint: string = undefined;
-        let experimentEffect: string = undefined;
         if (distributorBlueprint) {
-            blueprint = distributorBlueprints.find(modifier =>
+            selectedDistributor.blueprint = distributorBlueprints.find(modifier =>
                 modifier.internalName === distributorBlueprint.fdname.toLowerCase())?.shortName;
 
             if (distributorBlueprint.special) {
-                experimentEffect = distributorExperimentEffects.find(modifier =>
+                selectedDistributor.experimentEffect = distributorExperimentEffects.find(modifier =>
                     modifier.internalName === distributorBlueprint.special.edname.toLowerCase())?.shortName;
             }
         }
 
-        return {
-            size,
-            rating,
-            blueprint,
-            experimentEffect
-        };
+        return selectedDistributor;
     }
 
     parseWeapons(): SelectedWeapons {
+        const selectedWeapons = emptyWeaponStore();
+
         const hardpoints: CoriolisHardpoint[] = this._shipBuild.components?.hardpoints;
         if (!hardpoints || hardpoints.length === 0) {
-            return null;
+            return selectedWeapons;
         }
 
         // filter(Boolean) uses coercion to filter out nulls, as Coriolis provides unset weapons
@@ -66,10 +66,9 @@ export class CoriolisParser extends Parser {
                                                                  hardpoint.group?.startsWith('AX '))
                                             .slice(0, MAX_AX_WEAPONS);
         if (importedAxWeapons.length === 0) {
-            return null;
+            return selectedWeapons;
         }
 
-        const selectedWeapons = buildEmptyWeaponStore();
         for (let i = 0; i < importedAxWeapons.length; i++) {
             const parsedName = importedAxWeapons[i].group;
             if (!parsedName) {
