@@ -18,22 +18,22 @@
     </thead>
     <tbody>
         <tr>
-            <th class="">100% Accuracy</th>
-            <td class="has-text-centered" id="100Basic">{totData.basicAmmo.tot100}</td>
-            <td class="has-text-centered" id="100Std">{totData.standardAmmo.tot100}</td>
-            <td class="has-text-centered" id="100Prem">{totData.premiumAmmo.tot100}</td>
+            <th>100% Accuracy</th>
+            <td class="has-text-centered table-column">{totData.basicAmmo.tot100}</td>
+            <td class="has-text-centered table-column">{totData.standardAmmo.tot100}</td>
+            <td class="has-text-centered table-column">{totData.premiumAmmo.tot100}</td>
         </tr>
         <tr>
             <th>75% Accuracy</th>
-            <td class="has-text-centered" id="75Basic">{totData.basicAmmo.tot75}</td>
-            <td class="has-text-centered" id="75Std">{totData.standardAmmo.tot75}</td>
-            <td class="has-text-centered" id="75Prem">{totData.premiumAmmo.tot75}</td>
+            <td class="has-text-centered table-column">{totData.basicAmmo.tot75}</td>
+            <td class="has-text-centered table-column">{totData.standardAmmo.tot75}</td>
+            <td class="has-text-centered table-column">{totData.premiumAmmo.tot75}</td>
         </tr>
         <tr>
             <th class="table-header-end">50% Accuracy</th>
-            <td class="has-text-centered" id="50Basic">{totData.basicAmmo.tot50}</td>
-            <td class="has-text-centered" id="50Std">{totData.standardAmmo.tot50}</td>
-            <td class="has-text-centered" id="50Prem">{totData.premiumAmmo.tot50}</td>
+            <td class="has-text-centered table-column">{totData.basicAmmo.tot50}</td>
+            <td class="has-text-centered table-column">{totData.standardAmmo.tot50}</td>
+            <td class="has-text-centered table-column">{totData.premiumAmmo.tot50}</td>
         </tr>
     </tbody>
 </table>
@@ -42,5 +42,9 @@
     @import 'src/theme';
 	.table {
         border-collapse: collapse;
+    }
+
+    .table-column {
+        width: 60px;
     }
 </style>

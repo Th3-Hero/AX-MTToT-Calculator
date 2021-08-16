@@ -6,8 +6,9 @@
         selectedWeapons,
         sdpsExtraDelay,
         selectedDistributor,
-        timeOnTargetData, setEmptyTotStore
-    } from "../../typescript/store";
+        timeOnTargetData,
+        setEmptyTotStore,
+    } from '../../typescript/store';
     import { gauss, AX_WEAPONS } from '../../typescript/data/weaponData'
     import {
         distributorRecharge,
@@ -23,18 +24,18 @@
         AmmoToTData,
         DistributorModifier,
         SelectedWeapon,
-        WeaponInformation
+        WeaponOption
     } from '../../typescript/data/dataFormat';
 
     const fireCalculation = (): void => {
-        const filteredWeapons: SelectedWeapon[] = Object.values($selectedWeapons).filter(selectedWeapon => selectedWeapon.name);
+        const filteredWeapons: SelectedWeapon[] = Object.values($selectedWeapons).filter(selectedWeapon => selectedWeapon.weaponName);
         if (filteredWeapons.length === 0) {
             $timeOnTargetData = setEmptyTotStore();
             return;
         }
 
         calculateTot();
-    }
+    };
 
     // Shorthand for subscribing to these stores. On change, they fire the method
     $: $selectedWeapons, fireCalculation();
@@ -42,15 +43,17 @@
     $: $range, fireCalculation();
     $: $heatsinks, fireCalculation();
 
+    let advancedTheory = false;
+
     const calculateSdps = (weapons: SelectedWeapon[]): void => {
         let totalDraw = 0;
-        weapons.filter(selectedWeapon => selectedWeapon.name === 'gauss')
+        weapons.filter(selectedWeapon => selectedWeapon.weaponName === 'gausscannon')
                .forEach(selectedWeapon => {
-                   const weapon = gauss.options.find(option => option.weaponSize === selectedWeapon.class);
+                   const weapon = gauss.options.find(option => option.weaponSize === selectedWeapon.size);
                    totalDraw += weapon.distroDraw
                });
 
-        const distributor = `${ $selectedDistributor.size }${ $selectedDistributor.class }`;
+        const distributor = `${ $selectedDistributor.size }${ $selectedDistributor.rating }`;
         let weaponRecharge = distributorRecharge[distributor];
         weaponRecharge = applyModifier(weaponRecharge, distributorBlueprints, $selectedDistributor.blueprint);
         if ($selectedDistributor.blueprint) {
@@ -79,7 +82,7 @@
     };
 
     const calculateTot = (): void => {
-        const filteredWeapons: SelectedWeapon[] = Object.values($selectedWeapons).filter(selectedWeapon => selectedWeapon.name);
+        const filteredWeapons: SelectedWeapon[] = Object.values($selectedWeapons).filter(selectedWeapon => selectedWeapon.weaponName);
 
         calculateSdps(filteredWeapons);
         resetCalculations(filteredWeapons);
@@ -92,7 +95,9 @@
             let adjDpsStandard = 0;
             let adjDpsPremium = 0;
             const uniqueWeapons = filteredWeapons.filter((weapon, index) =>
-                filteredWeapons.findIndex(selectedWeapon => selectedWeapon.name === weapon.name && selectedWeapon.class === weapon.class) === index);
+                filteredWeapons.findIndex(selectedWeapon => selectedWeapon.weaponName === weapon.weaponName &&
+                                                            selectedWeapon.size === weapon.size &&
+                                                            selectedWeapon.weaponType === weapon.weaponType) === index);
             for (const selectedWeapon of uniqueWeapons) {
                 const weaponOption = axWeaponsFind(selectedWeapon);
                 const adjDps = weaponOption.nDps * (weaponOption.armourPierce / thargoid.armourRating) * weaponOption.falloffFactor;
@@ -122,12 +127,14 @@
 
     const adjustForImpossible = (ammoData: AmmoToTData): void => {
         for (const [key, value] of Object.entries(ammoData)) {
-            if (value >= 0) {
-                continue;
+            if (value <= 0) {
+                ammoData[key] = 'N/A';
             }
-            ammoData[key] = 'N/A';
+            else if (value > 300 && !advancedTheory) {
+                ammoData[key] = '>300';
+            }
         }
-    }
+    };
 
     const resetCalculations = (filteredWeapons: SelectedWeapon[]): void => {
         for (const selectedWeapon of filteredWeapons) {
@@ -150,18 +157,24 @@
         }
     };
 
-    const axWeaponsFind = (selectedWeapon: SelectedWeapon): WeaponInformation => {
-        const weapon = AX_WEAPONS.find(weapon => selectedWeapon.name === weapon.shortName);
-        return weapon.options.find(option => option.weaponSize === selectedWeapon.class);
+    const axWeaponsFind = (selectedWeapon: SelectedWeapon): WeaponOption => {
+        const weapon = AX_WEAPONS.find(weapon => selectedWeapon.weaponName === weapon.internalName);
+
+        return weapon.options.find(option => option.weaponSize === selectedWeapon.size &&
+                              option.mount === selectedWeapon.weaponType);
     };
 </script>
 
-<!-- The spacing needs to be worked on for sure -->
 
 <h1 class="title has-text-centered mt-1">
     Minimum Theoretical <br>
     Time on Target
 </h1>
+
+<label class="toggle-advanced">
+    <input type=checkbox bind:checked={advancedTheory} on:change={fireCalculation}>
+    Show full times
+</label>
 
 {#each THARGOID_TYPES as interceptor}
     <InfoTable {interceptor}/>

@@ -2,8 +2,8 @@
     import {
         distributorBlueprints,
         distributorExperimentEffects,
-        distributorSizes,
-        distributorClasses
+        distributorRatings,
+        distributorSizes
     } from '../../../../typescript/data/distributorData';
     import { selectedDistributor } from '../../../../typescript/store';
 </script>
@@ -15,18 +15,18 @@
         {/each}
     </select>
     <!-- svelte-ignore a11y-no-onchange -->
-    <select class="dropdown-select mt-1" bind:value={$selectedDistributor.class}
+    <select class="dropdown-select mt-1" bind:value={$selectedDistributor.rating}
             on:change={() => {
-                if ($selectedDistributor.class === 'G') { 
+                if ($selectedDistributor.rating === 'G') {
                     $selectedDistributor.blueprint = '';
-                    $selectedDistributor.experimentEffect = ''; 
+                    $selectedDistributor.experimentEffect = '';
                 }
             }}>
-        {#each distributorClasses as distributorClass}
+        {#each distributorRatings as distributorClass}
             <option value="{distributorClass}">{distributorClass}</option>
         {/each}
     </select>
-    {#if $selectedDistributor.class === 'G'}
+    {#if $selectedDistributor.rating === 'G'}
         <img alt="(Guardian)" class="image is-inline" src="images/Guardian_insignia.png">
     {/if}
 </div>
@@ -34,7 +34,7 @@
 <div>
     <!-- svelte-ignore a11y-no-onchange -->
     <select class="dropdown-select mt-1" bind:value={$selectedDistributor.blueprint}
-            disabled="{$selectedDistributor.class === 'G'}"
+            disabled="{$selectedDistributor.rating === 'G'}"
             on:change={() => {
                 if (!$selectedDistributor.blueprint) { $selectedDistributor.experimentEffect = ''; }
             }}>

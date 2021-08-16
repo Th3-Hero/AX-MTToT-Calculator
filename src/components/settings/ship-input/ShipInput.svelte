@@ -4,7 +4,7 @@
     import { selectedWeapons } from '../../../typescript/store';
 </script>
 
-<h2 class="mb-1">Weapon Selection</h2>
+<h2 class="mt-0 mb-2">Weapon Selection</h2>
 {#each Object.keys($selectedWeapons) as index}
     <WeaponSelector {index}/>
 {/each}

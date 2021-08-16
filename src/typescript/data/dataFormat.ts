@@ -1,39 +1,39 @@
 export enum WeaponType {
-    FIXED = 'Fixed',
-    GIMBALLED = 'Gimballed',
-    TURRETED = 'Turreted',
-    DUMB_FIRE = 'Dumbfire'
+    FIXED = 'Fixed', GIMBAL = 'Gimballed', TURRET = 'Turret'
 }
 
-export interface WeaponInformation {
-    weaponSize: number;
+export enum WeaponSize {
+    SMALL = 1, MEDIUM, LARGE, HUGE
+}
+
+export interface WeaponOption {
+    mount: WeaponType;
+    weaponSize: WeaponSize;
     clipSize: number;
     rof: number;
     reloadTime: number;
     distroDraw: number;
-    damage: number;
-    axPercent: number;
     axDamage: number;
     sustainedAxDps: number;
-    nDps: number;
     armourPierce: number;
     falloffRange: number;
-    falloffFactor: number;
     maxRange: number;
     stdAmmoPercent: number;
     premAmmoPercent: number;
+    nDps: number;
+    falloffFactor: number;
 }
 
 export interface AxWeapon {
-    weaponName: string;
-    shortName: string
-    weaponType: WeaponType;
-    options: WeaponInformation[];
+    fullName: string;
+    internalName: string;
+    options: WeaponOption[];
 }
 
 export interface SelectedWeapon {
-    name: string;
-    class: number;
+    weaponName: string;
+    size: WeaponSize;
+    weaponType: WeaponType;
 }
 
 export interface SelectedWeapons {
@@ -49,13 +49,14 @@ export interface Thargoid {
 
 export interface SelectedDistributor {
     size: number;
-    class: string;
+    rating: string;
     blueprint: string;
     experimentEffect: string;
 }
 
 export interface DistributorModifier {
     name: string;
+    internalName: string;
     shortName: string;
     weaponRechargeModifier: number;
 }
