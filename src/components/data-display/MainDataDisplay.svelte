@@ -127,13 +127,12 @@
 
     const adjustForImpossible = (ammoData: AmmoToTData): void => {
         for (const [key, value] of Object.entries(ammoData)) {
-            if (value >= 0) {
-                if (value > 300 && !advancedTheory) {
-                    ammoData[key] = '>300';
-                }
-                continue;
+            if (value <= 0) {
+                ammoData[key] = 'N/A';
             }
-            ammoData[key] = 'N/A';
+            else if (value > 300 && !advancedTheory) {
+                ammoData[key] = '>300';
+            }
         }
     };
 

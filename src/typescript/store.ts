@@ -8,13 +8,18 @@ import {
 import { THARGOID_TYPES } from './data/thargoidData';
 import { MAX_AX_WEAPONS } from './util';
 
-export const buildStarterWeaponStore = (): SelectedWeapons => {
+export const buildEmptyWeaponStore = (): SelectedWeapons => {
     const weapons: SelectedWeapons = {}
 
     for (let i = 0; i < MAX_AX_WEAPONS; i++) {
         weapons[i] = { weaponName: '', size: undefined, weaponType: WeaponType.FIXED };
     }
     return weapons;
+};
+
+export const buildEmptyDistributorStore = (): SelectedDistributor => {
+    const emptyDistributor = { size: 1, rating: 'A', blueprint: undefined, experimentEffect: undefined }
+    return emptyDistributor;
 };
 
 export const setEmptyTotStore = (): TimeOnTargetData => {
@@ -32,10 +37,9 @@ export const setEmptyTotStore = (): TimeOnTargetData => {
 };
 
 // Input stores
-export const selectedWeapons = writable<SelectedWeapons>(buildStarterWeaponStore());
+export const selectedWeapons = writable<SelectedWeapons>(buildEmptyWeaponStore());
 export const range = writable<number>(1500);
-export const selectedDistributor = writable<SelectedDistributor>(
-    { size: 1, rating: 'A', blueprint: undefined, experimentEffect: undefined });
+export const selectedDistributor = writable<SelectedDistributor>(buildEmptyDistributorStore());
 export const heatsinks = writable<number>(0);
 
 // Calculation stores

@@ -1,19 +1,8 @@
 import { SelectedDistributor, SelectedWeapons, WeaponType } from '../../../typescript/data/dataFormat';
 
-// The below import is unused be necessary due to a Svelte issue with enums, described here:
+// The below import is unused but necessary due to a Svelte issue with enums, described here:
 // https://www.reddit.com/r/sveltejs/comments/n87r2n/getting_a_typescript_enum_in_a_standalone_file_to/
 import { SettingsTabs } from '../SettingTabs';
-
-const empty: ShipPreset = {
-    weapons: {
-        0: { weaponName: '', size: undefined, weaponType: WeaponType.FIXED },
-        1: { weaponName: '', size: undefined, weaponType: WeaponType.FIXED },
-        2: { weaponName: '', size: undefined, weaponType: WeaponType.FIXED },
-        3: { weaponName: '', size: undefined, weaponType: WeaponType.FIXED }
-    },
-    distributor: { size: 1, rating: 'A', blueprint: undefined, experimentEffect: undefined },
-    heatsinks: 0
-};
 
 const chieftain: ShipPreset = {
     weapons: {
@@ -60,7 +49,6 @@ const kraitMk2: ShipPreset = {
 };
 
 export const presets: Map<string, ShipPreset> = new Map([
-    ['Empty', empty],
     ['Chieftain', chieftain],
     ['Challenger', challenger],
     ['Cutter', cutter],

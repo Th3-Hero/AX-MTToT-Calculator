@@ -62,7 +62,7 @@
 
             <h2 class="mb-1">Target Range</h2>
             <input type="text" bind:value={$range} on:change={inputCheck} class="text-input small-text-input has-text-centered p-0" placeholder="1500">
-            {/if}
+        {/if}
     </div>
 </div>
 

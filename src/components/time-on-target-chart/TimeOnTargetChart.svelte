@@ -29,13 +29,7 @@
     };
 
     const hideDelay = (): void => {
-        let numberOfGauss = 0;
-	    for (let weapon of Object.values($selectedWeapons)) {
-            if (weapon.weaponName === 'gausscannon') {
-                numberOfGauss ++;
-            }
-        }
-        haveGaussSelected = numberOfGauss > 0
+	    haveGaussSelected = Object.values($selectedWeapons).filter(weapon => weapon.weaponName === 'gausscannon').length > 0;
     };
 </script>
 

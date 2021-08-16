@@ -1,6 +1,11 @@
 <script lang="ts">
     import { presets } from './ShipPresets';
-    import { selectedWeapons, selectedDistributor, heatsinks } from '../../../typescript/store';
+    import { 
+        selectedWeapons, 
+        selectedDistributor, 
+        heatsinks,
+        buildEmptyWeaponStore,
+        buildEmptyDistributorStore } from '../../../typescript/store';
     import type { SelectedWeapons } from '../../../typescript/data/dataFormat';
 
     const deepCloneWeapons = (presetWeapons: SelectedWeapons): SelectedWeapons => {
@@ -17,10 +22,17 @@
         $selectedDistributor = { ... preset.distributor };
         $heatsinks = preset.heatsinks;
     };
+
+    const emptyStores = (): void => {
+        $selectedWeapons = buildEmptyWeaponStore();
+        $selectedDistributor = buildEmptyDistributorStore();
+        $heatsinks = 0;
+    };
 </script>
 
 <div>
     <div class="is-flex is-flex-direction-column is-align-items-center">
+        <button type="button" class="mt-3 preset-button" name="presetOption" on:click={emptyStores}>Empty</button>
         {#each [...presets.keys()] as preset}
             <button type="button" class="mt-3 preset-button" name="presetOption" on:click={() => selectPreset(preset)}>{preset}</button>
         {/each}

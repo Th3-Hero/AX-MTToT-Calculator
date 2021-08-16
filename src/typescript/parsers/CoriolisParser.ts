@@ -7,7 +7,7 @@ import {
     distributorSizes
 } from '../data/distributorData';
 import { MAX_AX_WEAPONS } from '../util';
-import { buildStarterWeaponStore } from '../store';
+import { buildEmptyWeaponStore } from '../store';
 import { AX_WEAPONS } from '../data/weaponData';
 
 export class CoriolisParser extends Parser {
@@ -69,7 +69,7 @@ export class CoriolisParser extends Parser {
             return null;
         }
 
-        const selectedWeapons = buildStarterWeaponStore();
+        const selectedWeapons = buildEmptyWeaponStore();
         for (let i = 0; i < importedAxWeapons.length; i++) {
             const parsedName = importedAxWeapons[i].group;
             if (!parsedName) {
