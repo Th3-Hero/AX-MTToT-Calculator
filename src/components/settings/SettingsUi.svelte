@@ -37,12 +37,15 @@
     <div class="tabs mb-3 is-boxed is-centered">
         <ul class="p-0">
             <li id="settingsTab" class="tab is-active" on:click={() => newTab = SettingsTabs.SETTINGS}>
+                <!-- svelte-ignore a11y-missing-attribute -->
                 <a><span>Settings</span></a>
             </li>
             <li id="importerTab" class="tab" on:click={() => newTab = SettingsTabs.IMPORTER}>
+                <!-- svelte-ignore a11y-missing-attribute -->
                 <a><span>Importer</span></a>
             </li>
             <li id="presetsTab" class="tab" on:click={() => newTab = SettingsTabs.PRESETS}>
+                <!-- svelte-ignore a11y-missing-attribute -->
                 <a><span>Presets</span></a>
             </li>
         </ul>
