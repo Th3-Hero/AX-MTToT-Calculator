@@ -1,31 +1,31 @@
 <script lang="ts">
-    import InfoTable from './info-table/InfoTable.svelte';
-    import {
-        range,
-        heatsinks,
-        selectedWeapons,
-        sdpsExtraDelay,
-        selectedDistributor,
-        timeOnTargetData,
-        setEmptyTotStore,
-    } from '../../typescript/store';
-    import { gauss, AX_WEAPONS } from '../../typescript/data/weaponData'
-    import {
-        distributorRecharge,
-        distributorBlueprints,
-        distributorExperimentEffects
-    } from '../../typescript/data/distributorData'
-    import { THARGOID_TYPES } from '../../typescript/data/thargoidData'
-    import {
-        MIN_GAUSS_DELAY_MS,
-        HEATSINK_WEP_RECHARGE
-    } from '../../typescript/util'
     import type {
         AmmoToTData,
         DistributorModifier,
         SelectedWeapon,
         WeaponOption
     } from '../../typescript/data/dataFormat';
+    import { AX_WEAPONS, gauss } from '../../typescript/data/weaponData';
+    import {
+        distributorBlueprints,
+        distributorExperimentEffects,
+        distributorRecharge
+    } from '../../typescript/data/distributorData';
+    import {
+        HEATSINK_WEP_RECHARGE,
+        MIN_GAUSS_DELAY_MS
+    } from '../../typescript/util';
+    import {
+        heatsinks,
+        range,
+        sdpsExtraDelay,
+        selectedDistributor,
+        selectedWeapons,
+        setEmptyTotStore,
+        timeOnTargetData,
+    } from '../../typescript/store';
+    import InfoTable from './info-table/InfoTable.svelte';
+    import { THARGOID_TYPES } from '../../typescript/data/thargoidData';
 
     const fireCalculation = (): void => {
         const filteredWeapons: SelectedWeapon[] = Object.values($selectedWeapons).filter(selectedWeapon => selectedWeapon.weaponName);
@@ -48,10 +48,10 @@
     const calculateSdps = (weapons: SelectedWeapon[]): void => {
         let totalDraw = 0;
         weapons.filter(selectedWeapon => selectedWeapon.weaponName === 'gausscannon')
-               .forEach(selectedWeapon => {
-                   const weapon = gauss.options.find(option => option.weaponSize === selectedWeapon.size);
-                   totalDraw += weapon.distroDraw
-               });
+            .forEach(selectedWeapon => {
+                const weapon = gauss.options.find(option => option.weaponSize === selectedWeapon.size);
+                totalDraw += weapon.distroDraw;
+            });
 
         const distributor = `${ $selectedDistributor.size }${ $selectedDistributor.rating }`;
         let weaponRecharge = distributorRecharge[distributor];
@@ -60,7 +60,7 @@
             weaponRecharge = applyModifier(weaponRecharge, distributorExperimentEffects, $selectedDistributor.experimentEffect);
         }
 
-        const delay = ((totalDraw / (weaponRecharge + (HEATSINK_WEP_RECHARGE * $heatsinks))) * 1000) - MIN_GAUSS_DELAY_MS;
+        const delay = totalDraw / (weaponRecharge + HEATSINK_WEP_RECHARGE * $heatsinks) * 1000 - MIN_GAUSS_DELAY_MS;
         $sdpsExtraDelay = delay < 0 ? 0 : delay;
         gaussDamageOutput();
     };
@@ -69,15 +69,15 @@
         if (!modifierName) {
             return weaponRecharge;
         }
-        const modifier = toSearch.find(modifier => modifier.shortName === modifierName);
+        const modifier = toSearch.find(m => m.shortName === modifierName);
         return weaponRecharge * (1.0 + modifier.weaponRechargeModifier);
     };
 
     const gaussDamageOutput = (): void => {
         gauss.options.forEach(option => {
             option.rof = 1 / ((MIN_GAUSS_DELAY_MS + $sdpsExtraDelay) / 1000);
-            option.sustainedAxDps = (option.clipSize / option.rof) /
-                ((option.clipSize / option.rof) + option.reloadTime) * option.axDamage * option.rof;
+            option.sustainedAxDps = option.clipSize / option.rof /
+                (option.clipSize / option.rof + option.reloadTime) * option.axDamage * option.rof;
         });
     };
 
@@ -158,7 +158,7 @@
     };
 
     const axWeaponsFind = (selectedWeapon: SelectedWeapon): WeaponOption => {
-        const weapon = AX_WEAPONS.find(weapon => selectedWeapon.weaponName === weapon.internalName);
+        const weapon = AX_WEAPONS.find(w => selectedWeapon.weaponName === w.internalName);
 
         return weapon.options.find(option => option.weaponSize === selectedWeapon.size &&
                               option.mount === selectedWeapon.weaponType);

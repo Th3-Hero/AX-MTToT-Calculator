@@ -1,10 +1,10 @@
 <script lang="ts">
-    import { THARGOID_TYPES } from '../../typescript/data/thargoidData'
-    import InterceptorData from './interceptor-data/InterceptorData.svelte';
-    import { selectedDistributor, sdpsExtraDelay, selectedWeapons } from '../../typescript/store';
-    import { MIN_GAUSS_DELAY_MS, MS_PER_MINUTE } from '../../typescript/util'
+    import { MIN_GAUSS_DELAY_MS, MS_PER_MINUTE } from '../../typescript/util';
+    import { sdpsExtraDelay, selectedDistributor, selectedWeapons } from '../../typescript/store';
     import domtoimage from 'dom-to-image';
+    import InterceptorData from './interceptor-data/InterceptorData.svelte';
     import { saveAs } from 'file-saver'; // This is needed, TS doesn't understand .saveAs
+    import { THARGOID_TYPES } from '../../typescript/data/thargoidData';
 
     let shipName = '';
     $: delay = Math.round($sdpsExtraDelay) + MIN_GAUSS_DELAY_MS;
@@ -25,21 +25,20 @@
             return 'Not engineered';
         }
 
-        return `${blueprint.toUpperCase()} + ${effect ? effect.toUpperCase() : 'No effect'}`;
+        return `${ blueprint.toUpperCase() } + ${ effect ? effect.toUpperCase() : 'No effect' }`;
     };
 
     const hideDelay = (): void => {
-	    haveGaussSelected = Object.values($selectedWeapons).filter(weapon => weapon.weaponName === 'gausscannon').length > 0;
+        haveGaussSelected = Object.values($selectedWeapons).filter(weapon =>
+            weapon.weaponName === 'gausscannon').length > 0;
     };
 
     const chartToImage = (): void => {
-        domtoimage.toBlob(document.getElementById('customChart'))
-        .then((blob) => {
+        domtoimage.toBlob(document.getElementById('customChart')).then((blob) => {
             window.saveAs(blob, 'My_Chart.png');
         });
     };
 </script>
-
 
 <div class="time-on-target-chart">
     <div class="chart-settings">
@@ -71,8 +70,8 @@
         <div class="ml-2 mt-3">
             <div class="has-font-20 mt-1">{shipName || "AX Ship"}</div>
             <div class="has-font-20 mt-1">
-                {`${$selectedDistributor.size}${$selectedDistributor.rating}
-                    distributor (${distributorEngineering()})`
+                {`${ $selectedDistributor.size }${ $selectedDistributor.rating }
+                    distributor (${ distributorEngineering() })`
                 }
             </div>
             <div class="has-font-20 mt-1">{ammo} ammo</div>

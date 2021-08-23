@@ -1,14 +1,14 @@
-import { Parser } from './Parser';
-import { SelectedDistributor, SelectedWeapons, WeaponType, WeaponSize } from '../data/dataFormat';
 import {
     distributorBlueprints,
     distributorExperimentEffects,
     distributorRatings,
     distributorSizes
 } from '../data/distributorData';
-import { MAX_AX_WEAPONS } from '../util';
 import { emptyDistributorStore, emptyWeaponStore } from '../store';
+import { SelectedDistributor, SelectedWeapons, WeaponSize, WeaponType } from '../data/dataFormat';
 import { AX_WEAPONS } from '../data/weaponData';
+import { MAX_AX_WEAPONS } from '../util';
+import { Parser } from './Parser';
 
 export class CoriolisParser extends Parser {
     shipName(): string {
@@ -62,9 +62,8 @@ export class CoriolisParser extends Parser {
 
         // filter(Boolean) uses coercion to filter out nulls, as Coriolis provides unset weapons
         const importedAxWeapons = hardpoints.filter(Boolean)
-                                            .filter(hardpoint => hardpoint.group?.startsWith('Guardian ') ||
-                                                                 hardpoint.group?.startsWith('AX '))
-                                            .slice(0, MAX_AX_WEAPONS);
+            .filter(hardpoint => hardpoint.group?.startsWith('Guardian ') || hardpoint.group?.startsWith('AX '))
+            .slice(0, MAX_AX_WEAPONS);
         if (importedAxWeapons.length === 0) {
             return selectedWeapons;
         }

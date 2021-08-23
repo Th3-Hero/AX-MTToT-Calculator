@@ -1,9 +1,9 @@
 <script lang="ts">
-    import ShipInput from './ship-input/ShipInput.svelte';
-    import ShipImport from './ship-import/ShipImport.svelte';
-    import { range, heatsinks } from '../../typescript/store';
+    import { heatsinks, range } from '../../typescript/store';
     import Presets from './presets/Presets.svelte';
     import { SettingsTabs } from './SettingTabs';
+    import ShipImport from './ship-import/ShipImport.svelte';
+    import ShipInput from './ship-input/ShipInput.svelte';
 
     let selectedTab = SettingsTabs.SETTINGS;
     let newTab = SettingsTabs.SETTINGS;

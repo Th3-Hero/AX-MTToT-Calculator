@@ -3,9 +3,9 @@
 </svelte:head>
 
 <script lang="ts">
-	import SettingUi from './components/settings/SettingsUi.svelte'
-	import DataDisplay from './components/data-display/MainDataDisplay.svelte'
-	import TimeOnTargetChart from './components/time-on-target-chart/TimeOnTargetChart.svelte'
+	import DataDisplay from './components/data-display/MainDataDisplay.svelte';
+	import SettingUi from './components/settings/SettingsUi.svelte';
+	import TimeOnTargetChart from './components/time-on-target-chart/TimeOnTargetChart.svelte';
 </script>
 
 <main class="is-flex is-justify-content-center">

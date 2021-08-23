@@ -1,9 +1,9 @@
 <script lang="ts">
-    import { EdsyParser } from '../../../typescript/parsers/EdsyParser';
-    import { CoriolisParser } from '../../../typescript/parsers/CoriolisParser';
-    import { Parser } from '../../../typescript/parsers/Parser';
     import { selectedDistributor, selectedWeapons } from '../../../typescript/store';
+    import { CoriolisParser } from '../../../typescript/parsers/CoriolisParser';
+    import { EdsyParser } from '../../../typescript/parsers/EdsyParser';
     import { InaraParser } from '../../../typescript/parsers/InaraParser';
+    import { Parser } from '../../../typescript/parsers/Parser';
     import { SettingsTabs } from '../SettingTabs';
 
     let userInput = '';
@@ -12,7 +12,7 @@
     let errorInfo = '';
 
     const parseInput = (): void => {
-        let inputAsJson: object;
+        let inputAsJson: unknown;
         try {
             inputAsJson = JSON.parse(userInput);
             if (inputAsJson == null || typeof inputAsJson !== 'object') {
