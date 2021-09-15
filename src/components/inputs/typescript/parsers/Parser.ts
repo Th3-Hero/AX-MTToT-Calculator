@@ -1,4 +1,4 @@
-import { SelectedDistributor, SelectedWeapons } from '../data/dataFormat';
+import { SelectedDistributor, SelectedWeapons } from '../../../../typescript/data/dataFormat';
 
 export abstract class Parser {
     public constructor(

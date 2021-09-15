@@ -8,24 +8,24 @@
         selectedDistributor,
         timeOnTargetData,
         setEmptyTotStore,
-    } from '../../typescript/store';
-    import { gauss, AX_WEAPONS } from '../../typescript/data/weaponData'
+    } from '../typescript/store';
+    import { gauss, AX_WEAPONS } from '../../../typescript/data/weaponData'
     import {
         distributorRecharge,
         distributorBlueprints,
         distributorExperimentEffects
-    } from '../../typescript/data/distributorData'
-    import { THARGOID_TYPES } from '../../typescript/data/thargoidData'
+    } from '../../../typescript/data/distributorData'
+    import { THARGOID_TYPES } from '../../../typescript/data/thargoidData'
     import {
         MIN_GAUSS_DELAY_MS,
         HEATSINK_WEP_RECHARGE
-    } from '../../typescript/util'
+    } from '../typescript/util'
     import type {
         AmmoToTData,
         DistributorModifier,
         SelectedWeapon,
         WeaponOption
-    } from '../../typescript/data/dataFormat';
+    } from '../../../typescript/data/dataFormat';
 
     const fireCalculation = (): void => {
         const filteredWeapons: SelectedWeapon[] = Object.values($selectedWeapons).filter(selectedWeapon => selectedWeapon.weaponName);

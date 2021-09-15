@@ -6,7 +6,7 @@
         heatsinks,
         emptyWeaponStore,
         emptyDistributorStore
-    } from '../../../typescript/store';
+    } from '../../mttot/typescript/store';
     import type { SelectedWeapons } from '../../../typescript/data/dataFormat';
 
     const deepCloneWeapons = (presetWeapons: SelectedWeapons): SelectedWeapons => {
@@ -31,13 +31,11 @@
     };
 </script>
 
-<div>
-    <div class="is-flex is-flex-direction-column is-align-items-center">
-        <button type="button" class="mt-3 preset-button" name="presetOption" on:click={emptyStores}>Empty</button>
-        {#each [...presets.keys()] as preset}
-            <button type="button" class="mt-3 preset-button" name="presetOption" on:click={() => selectPreset(preset)}>{preset}</button>
-        {/each}
-    </div>
+<div class="is-flex is-flex-direction-column is-align-items-center">
+    <button type="button" class="mt-3 preset-button" name="presetOption" on:click={emptyStores}>Empty</button>
+    {#each [...presets.keys()] as preset}
+        <button type="button" class="mt-3 preset-button" name="presetOption" on:click={() => selectPreset(preset)}>{preset}</button>
+    {/each}
 </div>
 
 <style lang="scss">

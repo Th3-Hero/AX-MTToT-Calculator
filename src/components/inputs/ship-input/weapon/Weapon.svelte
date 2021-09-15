@@ -1,7 +1,7 @@
 <script lang="ts">
     import type { AxWeapon } from '../../../../typescript/data/dataFormat';
     import { AX_WEAPONS } from '../../../../typescript/data/weaponData';
-    import { selectedWeapons } from '../../../../typescript/store';
+    import { selectedWeapons } from '../../../mttot/typescript/store';
 
     const findAxWeapon = (weaponName: string): AxWeapon | undefined => {
         return AX_WEAPONS.find(axWeapon => axWeapon.internalName === weaponName);
@@ -17,7 +17,7 @@
 </script>
 
 <!-- svelte-ignore a11y-no-onchange -->
-<div>
+<div class="ml-2">
     <select class="dropdown-select mt-2 weapon-input"
             bind:value={selectedWeapon.weaponName}
             on:change={() => {

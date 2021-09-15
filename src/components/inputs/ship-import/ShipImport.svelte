@@ -1,9 +1,9 @@
 <script lang="ts">
-    import { EdsyParser } from '../../../typescript/parsers/EdsyParser';
-    import { CoriolisParser } from '../../../typescript/parsers/CoriolisParser';
-    import { Parser } from '../../../typescript/parsers/Parser';
-    import { selectedDistributor, selectedWeapons } from '../../../typescript/store';
-    import { InaraParser } from '../../../typescript/parsers/InaraParser';
+    import { EdsyParser } from '../typescript/parsers/EdsyParser';
+    import { CoriolisParser } from '../typescript/parsers/CoriolisParser';
+    import { Parser } from '../typescript/parsers/Parser';
+    import { selectedDistributor, selectedWeapons } from '../../mttot/typescript/store';
+    import { InaraParser } from '../typescript/parsers/InaraParser';
     import { SettingsTabs } from '../SettingTabs';
 
     let userInput = '';
@@ -44,9 +44,9 @@
     };
 </script>
 
-<div class="mr-2 is-flex is-flex-direction-column is-align-items-center">
+<div class="ml-2 mr-2 is-flex is-flex-direction-column is-align-items-center">
     <p class="mt-0 has-text-centered">Import an existing build using JSON from EDSY, Inara and Coriolis</p>
-    <textarea bind:value={userInput} class="textarea is-paddingless import-box has-fixed-size"></textarea>
+    <textarea bind:value={userInput} class="is-paddingless import-box has-fixed-size"></textarea>
     <p class="is-size-7">Importing will overwrite previous module selection!</p>
     <button class="mt-3 import-button" on:click={() => parseInput()}>Import</button>
     {#if errorInfo !== ''}
@@ -61,10 +61,13 @@
 <style lang="scss">
     @import "src/theme";
     .import-box {
-        width: 300px;
-        height: 350px;
+        width: 100%;
+        height: 300px;
+        color: $font;
         background: $input;
+        outline: none;
         border: none;
+        resize: none;
 
         -ms-overflow-style: none;
         scrollbar-width: none;

@@ -1,46 +1,96 @@
 <svelte:head>
-	<style src="./bulma.scss"></style>
+    <style src="./bulma.scss"></style>
 </svelte:head>
 
 <script lang="ts">
-	import SettingUi from './components/settings/SettingsUi.svelte'
-	import DataDisplay from './components/data-display/MainDataDisplay.svelte'
-	import TimeOnTargetChart from './components/time-on-target-chart/TimeOnTargetChart.svelte'
+    import SettingUi from './components/inputs/SettingsUi.svelte'
+    import Mttot from './components/Mttot.svelte';
+    import { NavbarTabs } from './typescript/Navbar';
+
+    let selectedTab = NavbarTabs.MTTOT;
+    let newTab = NavbarTabs.MTTOT;
+
+    const selectTab = (): void => {
+        if (newTab === selectedTab) {
+            return;
+        }
+        document.getElementById(`${selectedTab}Nav`).classList.remove('is-active');
+        document.getElementById(`${newTab}Nav`).classList.add('is-active');
+        selectedTab = newTab;
+    };
+
+    $: newTab, selectTab();
+
 </script>
 
-<main class="is-flex is-justify-content-center">
-	<div class="grid-container vertically-center">
-		<div class="component-container">
-			<SettingUi/>
-		</div>
+<div class="main-page-container">
+    <div class="tabs is-boxed is-fullwidth mb-0 tab-container">  <!-- width of tab-buttons needs to be changed depending on how many there are -->
+        <ul class="p-0 m-0 ml-3 mr-3">
+            <li id="mttotNav" class="tab is-active" on:click={() => newTab = NavbarTabs.MTTOT}>
+                <!-- svelte-ignore a11y-missing-attribute -->
+                <a><span>Mttot Calculator</span></a>
+            </li>
+            <li id="gaussNav" class="tab" on:click={() => newTab = NavbarTabs.GAUSS}>
+                <!-- svelte-ignore a11y-missing-attribute -->
+                <a><span>Gauss Calculator</span></a>
+            </li>
+        </ul>
+    </div>
 
-		<div class="component-container inner-container">
-			<DataDisplay/>
-		</div>
+    <div class="is-flex content-container">
+        <div class="setting-container">
+            <SettingUi/>
+        </div>
 
-		<div class="component-container">
-			<TimeOnTargetChart/>
-		</div>
-	</div>
-</main>
+        {#if selectedTab === 'mttot'}
+            <Mttot/>
+        {:else}
+            <div>Placeholder Gauss Component</div>
+        {/if}
+    </div>
+</div>
 
 <style lang="scss">
-	.vertically-center {
-		margin-top: calc((100vh - 700px)/2);
-	}
+    @import "src/theme";
+    .main-page-container {
+        position: absolute;
+        left: 10%;
+        right: 10%;
+        width: 80%;
+        height: 95%;
+    }
 
-	.grid-container {
-		display: grid;
-		grid-template-columns: 325px 450px 325px;
-		grid-template-rows: 700px;
-	}
+    .tab-container {
+        width: 100%;
+        height: 50px;
+        border: 3px solid $orange;
+        border-bottom: none;
+    }
 
-	.component-container {
-		border: 3px solid #ff7100;
-	}
+    .tab a {
+        color: $font;
+        cursor: pointer;
+    }
+    
+    .tabs ul {
+        align-items: flex-end;
+        border-bottom: none;
+    }
 
-	.inner-container {
-		border-right: none;
-		border-left: none;
-	}
+    .tabs.is-boxed li.is-active a {
+        background: $background-light;
+    }
+
+    .setting-container {
+        height: 600px;
+        width: 325px;
+        flex-grow: 0;
+        flex-shrink: 0;
+    }
+
+    .content-container {
+        width: 100%;
+        border: 3px solid $orange;
+    }
+
 </style>

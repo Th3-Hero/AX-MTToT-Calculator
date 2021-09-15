@@ -1,14 +1,19 @@
-import { Parser } from './Parser';
-import { SelectedDistributor, SelectedWeapons, WeaponType, WeaponSize } from '../data/dataFormat';
+import {
+    SelectedDistributor,
+    SelectedWeapons,
+    WeaponSize,
+    WeaponType
+} from '../../../../typescript/data/dataFormat';
 import {
     distributorBlueprints,
     distributorExperimentEffects,
     distributorRatings,
     distributorSizes
-} from '../data/distributorData';
-import { MAX_AX_WEAPONS } from '../util';
-import { emptyDistributorStore, emptyWeaponStore } from '../store';
-import { AX_WEAPONS } from '../data/weaponData';
+} from '../../../../typescript/data/distributorData';
+import { emptyDistributorStore, emptyWeaponStore } from '../../../mttot/typescript/store';
+import { AX_WEAPONS } from '../../../../typescript/data/weaponData';
+import { MAX_AX_WEAPONS } from '../../../mttot/typescript/util';
+import { Parser } from './Parser';
 
 export class EdsyParser extends Parser {
     shipName(): string {

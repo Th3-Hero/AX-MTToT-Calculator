@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { timeOnTargetData } from '../../../typescript/store';
+    import { timeOnTargetData } from '../../typescript/store';
 
     export let interceptor: string;
     export let accuracy: string;

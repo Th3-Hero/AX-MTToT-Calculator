@@ -1,7 +1,7 @@
 <script lang="ts">
     import ShipInput from './ship-input/ShipInput.svelte';
     import ShipImport from './ship-import/ShipImport.svelte';
-    import { range, heatsinks } from '../../typescript/store';
+    import { range, heatsinks } from '../mttot/typescript/store';
     import Presets from './presets/Presets.svelte';
     import { SettingsTabs } from './SettingTabs';
 
@@ -40,17 +40,17 @@
                 <!-- svelte-ignore a11y-missing-attribute -->
                 <a><span>Settings</span></a>
             </li>
-            <li id="importerTab" class="tab" on:click={() => newTab = SettingsTabs.IMPORTER}>
-                <!-- svelte-ignore a11y-missing-attribute -->
-                <a><span>Importer</span></a>
-            </li>
             <li id="presetsTab" class="tab" on:click={() => newTab = SettingsTabs.PRESETS}>
                 <!-- svelte-ignore a11y-missing-attribute -->
                 <a><span>Presets</span></a>
             </li>
+            <li id="importerTab" class="tab" on:click={() => newTab = SettingsTabs.IMPORTER}>
+                <!-- svelte-ignore a11y-missing-attribute -->
+                <a><span>Importer</span></a>
+            </li>
         </ul>
     </div>
-    <div class="is-flex is-flex-direction-column ml-2">
+    <div class="is-flex is-flex-direction-column">
         {#if selectedTab !== 'settings'}
             {#if selectedTab === 'importer'}
                 <ShipImport bind:newTab/>
@@ -60,11 +60,13 @@
         {:else}
             <ShipInput/>
 
-            <h2 class="mb-1">Active Heatsinks</h2>
-            <input type="text" bind:value={$heatsinks} on:change={inputCheck} class="text-input small-text-input has-text-centered p-0" placeholder="0">
+            <div class="ml-2">
+                <h2 class="mb-1">Active Heatsinks</h2>
+                <input type="text" bind:value={$heatsinks} on:change={inputCheck} class="text-input small-text-input has-text-centered p-0" placeholder="0">
 
-            <h2 class="mb-1">Target Range</h2>
-            <input type="text" bind:value={$range} on:change={inputCheck} class="text-input small-text-input has-text-centered p-0" placeholder="1500">
+                <h2 class="mb-1">Target Range</h2>
+                <input type="text" bind:value={$range} on:change={inputCheck} class="text-input small-text-input has-text-centered p-0" placeholder="1500">
+            </div>
         {/if}
     </div>
 </div>
@@ -76,12 +78,12 @@
         width: 50px;
     }
 
-    .tab {
+    .tab a {
+        color: $font;
         cursor: pointer;
     }
 
     .tabs.is-boxed li.is-active a {
-        color: $font;
         background: $background-light;
     }
 </style>
