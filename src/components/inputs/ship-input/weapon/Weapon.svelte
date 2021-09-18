@@ -1,7 +1,7 @@
 <script lang="ts">
-    import type { AxWeapon } from '../../../../typescript/data/dataFormat';
-    import { AX_WEAPONS } from '../../../../typescript/data/weaponData';
-    import { selectedWeapons } from '../../../mttot/typescript/store';
+    import type { AxWeapon } from '../../../../data/dataFormat';
+    import { AX_WEAPONS } from '../../../../data/weaponData';
+    import { selectedWeapons } from '../../../mttot/store';
 
     const findAxWeapon = (weaponName: string): AxWeapon | undefined => {
         return AX_WEAPONS.find(axWeapon => axWeapon.internalName === weaponName);

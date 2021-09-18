@@ -1,8 +1,8 @@
 <script lang="ts">
-    import { THARGOID_TYPES } from '../../../typescript/data/thargoidData'
+    import { THARGOID_TYPES } from '../../../data/thargoidData'
     import InterceptorData from './interceptor-data/InterceptorData.svelte';
-    import { selectedDistributor, sdpsExtraDelay, selectedWeapons } from '../typescript/store';
-    import { MIN_GAUSS_DELAY_MS, MS_PER_MINUTE } from '../typescript/util'
+    import { selectedDistributor, sdpsExtraDelay, selectedWeapons } from '../store';
+    import { MIN_GAUSS_DELAY_MS, MS_PER_MINUTE } from '../util'
     import domtoimage from 'dom-to-image';
     import { saveAs } from 'file-saver'; // This is needed, TS doesn't understand .saveAs
 
@@ -63,8 +63,7 @@
                 <option value="50">50%</option>
             </select>
     
-            <button class="download-button" on:click={chartToImage}>Download Chart <br> 
-                                                                        as PNG</button>
+            <button class="download-button" on:click={chartToImage}>Download Chart <br> as PNG</button>
     
         </div>
     </div>

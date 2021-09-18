@@ -3,16 +3,16 @@ import {
     SelectedWeapons,
     WeaponSize,
     WeaponType
-} from '../../../../typescript/data/dataFormat';
+} from '../../../data/dataFormat';
 import {
     distributorBlueprints,
     distributorExperimentEffects,
     distributorRatings,
     distributorSizes
-} from '../../../../typescript/data/distributorData';
-import { emptyDistributorStore, emptyWeaponStore } from '../../../mttot/typescript/store';
-import { AX_WEAPONS } from '../../../../typescript/data/weaponData';
-import { MAX_AX_WEAPONS } from '../../../mttot/typescript/util';
+} from '../../../data/distributorData';
+import { emptyDistributorStore, emptyWeaponStore } from '../../mttot/store';
+import { AX_WEAPONS } from '../../../data/weaponData';
+import { MAX_AX_WEAPONS } from '../../mttot/util';
 import { Parser } from './Parser';
 
 export class EdsyParser extends Parser {

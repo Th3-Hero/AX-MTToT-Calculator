@@ -3,9 +3,9 @@ import {
     SelectedWeapons,
     TimeOnTargetData,
     WeaponType
-} from '../../../typescript/data/dataFormat';
-import { MAX_AX_WEAPONS } from '../typescript/util';
-import { THARGOID_TYPES } from '../../../typescript/data/thargoidData';
+} from '../../data/dataFormat';
+import { MAX_AX_WEAPONS } from './util';
+import { THARGOID_TYPES } from '../../data/thargoidData';
 import { writable } from 'svelte/store';
 
 export const emptyWeaponStore = (): SelectedWeapons => {

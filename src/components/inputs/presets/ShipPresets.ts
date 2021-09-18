@@ -1,4 +1,4 @@
-import { SelectedDistributor, SelectedWeapons, WeaponType } from '../../../typescript/data/dataFormat';
+import { SelectedDistributor, SelectedWeapons, WeaponType } from '../../../data/dataFormat';
 
 // The below import is unused but necessary due to a Svelte issue with enums, described here:
 // https://www.reddit.com/r/sveltejs/comments/n87r2n/getting_a_typescript_enum_in_a_standalone_file_to/

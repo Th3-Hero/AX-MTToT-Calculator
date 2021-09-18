@@ -6,8 +6,8 @@
         heatsinks,
         emptyWeaponStore,
         emptyDistributorStore
-    } from '../../mttot/typescript/store';
-    import type { SelectedWeapons } from '../../../typescript/data/dataFormat';
+    } from '../../mttot/store';
+    import type { SelectedWeapons } from '../../../data/dataFormat';
 
     const deepCloneWeapons = (presetWeapons: SelectedWeapons): SelectedWeapons => {
         const clonedWeapons: SelectedWeapons = {};

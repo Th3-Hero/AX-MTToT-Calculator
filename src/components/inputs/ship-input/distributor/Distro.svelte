@@ -4,8 +4,8 @@
         distributorExperimentEffects,
         distributorRatings,
         distributorSizes
-    } from '../../../../typescript/data/distributorData';
-    import { selectedDistributor } from '../../../mttot/typescript/store';
+    } from '../../../../data/distributorData';
+    import { selectedDistributor } from '../../../mttot/store';
 </script>
 
 <div class="ml-2">

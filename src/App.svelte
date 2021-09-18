@@ -3,9 +3,9 @@
 </svelte:head>
 
 <script lang="ts">
-    import SettingUi from './components/inputs/SettingsUi.svelte'
+    import SettingUi from './components/inputs/SettingsUi.svelte';
     import Mttot from './components/Mttot.svelte';
-    import { NavbarTabs } from './typescript/Navbar';
+    import { NavbarTabs } from './NavbarTabs';
 
     let selectedTab = NavbarTabs.MTTOT;
     let newTab = NavbarTabs.MTTOT;
@@ -28,7 +28,7 @@
         <ul class="p-0 m-0 ml-3 mr-3">
             <li id="mttotNav" class="tab is-active" on:click={() => newTab = NavbarTabs.MTTOT}>
                 <!-- svelte-ignore a11y-missing-attribute -->
-                <a><span>Mttot Calculator</span></a>
+                <a><span>Time on Target Calculator</span></a>
             </li>
             <li id="gaussNav" class="tab" on:click={() => newTab = NavbarTabs.GAUSS}>
                 <!-- svelte-ignore a11y-missing-attribute -->

@@ -1,6 +1,6 @@
 <script lang="ts">
-    import { range, timeOnTargetData } from '../../typescript/store';
-    import type { Thargoid } from '../../../../typescript/data/dataFormat';
+    import { range, timeOnTargetData } from '../../store';
+    import type { Thargoid } from '../../../../data/dataFormat';
 
     export let interceptor: Thargoid;
 

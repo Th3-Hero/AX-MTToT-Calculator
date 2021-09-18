@@ -1,7 +1,7 @@
 <script lang="ts">
     import ShipInput from './ship-input/ShipInput.svelte';
     import ShipImport from './ship-import/ShipImport.svelte';
-    import { range, heatsinks } from '../mttot/typescript/store';
+    import { range, heatsinks } from '../mttot/store';
     import Presets from './presets/Presets.svelte';
     import { SettingsTabs } from './SettingTabs';
 

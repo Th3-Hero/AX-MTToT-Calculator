@@ -1,5 +1,4 @@
 <script lang="ts">
-    // import SettingUi from './mttot/settings/SettingsUi.svelte'
 	import DataDisplay from './mttot/data-display/MainDataDisplay.svelte'
 	import TimeOnTargetChart from './mttot/time-on-target-chart/TimeOnTargetChart.svelte'
 </script>
