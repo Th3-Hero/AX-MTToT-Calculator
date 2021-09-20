@@ -1,7 +1,7 @@
 <script lang="ts">
-    import WeaponSelector from './weapon/Weapon.svelte';
     import DistroSelector from './distributor/Distro.svelte';
     import { selectedWeapons } from '../../mttot/store';
+    import WeaponSelector from './weapon/Weapon.svelte';
 </script>
 
 <h2 class="ml-2 mt-0 mb-2">Weapon Selection</h2>

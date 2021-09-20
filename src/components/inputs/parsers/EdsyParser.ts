@@ -1,16 +1,16 @@
 import {
-    SelectedDistributor,
-    SelectedWeapons,
-    WeaponSize,
-    WeaponType
-} from '../../../data/dataFormat';
-import {
     distributorBlueprints,
     distributorExperimentEffects,
     distributorRatings,
     distributorSizes
 } from '../../../data/distributorData';
 import { emptyDistributorStore, emptyWeaponStore } from '../../mttot/store';
+import {
+    SelectedDistributor,
+    SelectedWeapons,
+    WeaponSize,
+    WeaponType
+} from '../../../data/dataFormat';
 import { AX_WEAPONS } from '../../../data/weaponData';
 import { MAX_AX_WEAPONS } from '../../mttot/util';
 import { Parser } from './Parser';
@@ -23,7 +23,8 @@ export class EdsyParser extends Parser {
     parseDistributor(): SelectedDistributor {
         const selectedDistributor = emptyDistributorStore();
 
-        const distributor: EdsyDistributor = this._shipBuild.data?.Modules?.find(module => module.Slot.toLowerCase() === 'powerdistributor');
+        const distributor: EdsyDistributor = this._shipBuild.data?.Modules?.find(module =>
+            module.Slot.toLowerCase() === 'powerdistributor');
         if (distributor == null) {
             return selectedDistributor;
         }
@@ -65,14 +66,15 @@ export class EdsyParser extends Parser {
     parseWeapons(): SelectedWeapons {
         const selectedWeapons = emptyWeaponStore();
 
-        const hardpoints: EdsyHardpoint[] = this._shipBuild.data?.Modules?.filter(module => module.Slot.toLowerCase().includes('hardpoint'));
+        const hardpoints: EdsyHardpoint[] = this._shipBuild.data?.Modules?.filter(module => 
+            module.Slot.toLowerCase().includes('hardpoint'));
         if (hardpoints.length === 0) {
             return selectedWeapons;
 
         }
         const importedAxWeapons = hardpoints.filter(hardpoint => hardpoint.Item?.startsWith('hpt_guardian') ||
                                                                  hardpoint.Item?.startsWith('hpt_at'))
-                                            .slice(0, MAX_AX_WEAPONS);
+            .slice(0, MAX_AX_WEAPONS);
         if (importedAxWeapons.length === 0) {
             return selectedWeapons;
         }

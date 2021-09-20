@@ -1,8 +1,3 @@
-import { SelectedDistributor,
-    SelectedWeapons,
-    WeaponSize,
-    WeaponType
-} from '../../../data/dataFormat';
 import {
     distributorBlueprints,
     distributorExperimentEffects,
@@ -10,6 +5,11 @@ import {
     distributorSizes
 } from '../../../data/distributorData';
 import { emptyDistributorStore, emptyWeaponStore } from '../../mttot/store';
+import { SelectedDistributor,
+    SelectedWeapons,
+    WeaponSize,
+    WeaponType
+} from '../../../data/dataFormat';
 import { AX_WEAPONS } from '../../../data/weaponData';
 import { MAX_AX_WEAPONS } from '../../mttot/util';
 import { Parser } from './Parser';
@@ -66,9 +66,8 @@ export class CoriolisParser extends Parser {
 
         // filter(Boolean) uses coercion to filter out nulls, as Coriolis provides unset weapons
         const importedAxWeapons = hardpoints.filter(Boolean)
-                                            .filter(hardpoint => hardpoint.group?.startsWith('Guardian ') ||
-                                                                 hardpoint.group?.startsWith('AX '))
-                                            .slice(0, MAX_AX_WEAPONS);
+            .filter(hardpoint => hardpoint.group?.startsWith('Guardian ') || hardpoint.group?.startsWith('AX '))
+            .slice(0, MAX_AX_WEAPONS);
         if (importedAxWeapons.length === 0) {
             return selectedWeapons;
         }

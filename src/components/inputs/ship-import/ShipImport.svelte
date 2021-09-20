@@ -1,9 +1,9 @@
 <script lang="ts">
-    import { EdsyParser } from '../parsers/EdsyParser';
-    import { CoriolisParser } from '../parsers/CoriolisParser';
-    import { Parser } from '../parsers/Parser';
     import { selectedDistributor, selectedWeapons } from '../../mttot/store';
+    import { CoriolisParser } from '../parsers/CoriolisParser';
+    import { EdsyParser } from '../parsers/EdsyParser';
     import { InaraParser } from '../parsers/InaraParser';
+    import { Parser } from '../parsers/Parser';
     import { SettingsTabs } from '../SettingTabs';
 
     let userInput = '';

@@ -3,9 +3,9 @@
 </svelte:head>
 
 <script lang="ts">
-    import SettingUi from './components/inputs/SettingsUi.svelte';
     import Mttot from './components/Mttot.svelte';
     import { NavbarTabs } from './NavbarTabs';
+    import SettingUi from './components/inputs/SettingsUi.svelte';
 
     let selectedTab = NavbarTabs.MTTOT;
     let newTab = NavbarTabs.MTTOT;
@@ -14,8 +14,8 @@
         if (newTab === selectedTab) {
             return;
         }
-        document.getElementById(`${selectedTab}Nav`).classList.remove('is-active');
-        document.getElementById(`${newTab}Nav`).classList.add('is-active');
+        document.getElementById(`${ selectedTab }Nav`).classList.remove('is-active');
+        document.getElementById(`${ newTab }Nav`).classList.add('is-active');
         selectedTab = newTab;
     };
 

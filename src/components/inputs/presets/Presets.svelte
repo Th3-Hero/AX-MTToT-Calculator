@@ -1,12 +1,12 @@
 <script lang="ts">
-    import { presets } from './ShipPresets';
     import {
-        selectedWeapons,
-        selectedDistributor,
-        heatsinks,
+        emptyDistributorStore,
         emptyWeaponStore,
-        emptyDistributorStore
+        heatsinks,
+        selectedDistributor,
+        selectedWeapons
     } from '../../mttot/store';
+    import { presets } from './ShipPresets';
     import type { SelectedWeapons } from '../../../data/dataFormat';
 
     const deepCloneWeapons = (presetWeapons: SelectedWeapons): SelectedWeapons => {
